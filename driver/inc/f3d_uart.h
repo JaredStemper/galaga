@@ -6,7 +6,7 @@
  * Maintainer: 
  * Created: Thu Sep 26 07:05:43 2013
  * Last-Updated: 
- *           By: 
+ *           By: Jrod
  *     Update #: 0
  * Keywords: 
  * Compatibility: 
@@ -34,8 +34,11 @@
 
 /* Code: */
 
+//#include "queue.h"
+
 void f3d_uart_init(void);
 int putchar(int);
+void flush_uart(void);
 int getchar(void);
 void putstring(char *);
 

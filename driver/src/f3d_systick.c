@@ -41,25 +41,58 @@
 
 volatile int systick_flag = 0;
 
+int ips = 12;
+
+int led = 0; //0-8 incrememnt. turn off increment and turn on
+
 void f3d_systick_init(void) {
-  SysTick_Config(SystemCoreClock/100);
-  
+/*
+	from p.169 of manual
+
+	Function to setup the initial rate of timer
+	function should pass the number of interrupts per second in as the divisor to the SysTick_Config functio
+
+	For example, this call would produce generate 12 interrupts per second:
+		SysTick_Config(SystemCoreClock/12);
+*/
+
+
+	SysTick_Config(SystemCoreClock/ips);
+
 }
 
-int led_counter=0;
-void SysTick_Handler(void) {
-  if(user_btn_read()){
-    SysTick_Config(SystemCoreClock/10);
-  } else {
-     SysTick_Config(SystemCoreClock/100);
-  }
 
-//LED logic
-  f3d_led_all_off();
-  f3d_led_on(led_counter);
-  led_counter++;
-  if(led_counter==8){led_counter=0;}
-  
+//void SysTick_Config(int) {
+
+
+//}
+
+
+void SysTick_Handler(void) {
+/*
+	This handler is call on each interrupt. When this function is run, it clears the pending interrupt from the systick timer. 
+		Your code does not need to clear any systick flags.
+*/	
+
+//basically main, when the button is pressed, slow down
+    
+	if(!user_btn_read()) {
+		ips = 100;
+		SysTick_Config(SystemCoreClock/ips);
+	}
+	else {
+		ips = 12;
+		SysTick_Config(SystemCoreClock/ips);		
+	}	
+
+	//0-8 incrememnt. turn off increment and turn on
+	//led off
+	f3d_led_all_off();
+
+	//led increment and led on
+	f3d_led_on(++led % 8);
+	
 }
 
 /* f3d_systick.c ends here */
+//systick handler, when working. comment it out (empty handler). modify uart.c with putchar getchar onque and deque 
