@@ -6,10 +6,10 @@ ELF=$(notdir $(CURDIR)).elf
 BIN=$(notdir $(CURDIR)).bin
 
 # Tool path
-TOOLROOT=./tools/bin
+TOOLROOT=../tools/bin
 
 # Library path
-LIBROOT=./libraries
+LIBROOT=../libraries
 
 # Tools
 CC_0 = @echo -n "Compiling $< "; $(CC_1)
