@@ -6,10 +6,10 @@ ELF=$(notdir $(CURDIR)).elf
 BIN=$(notdir $(CURDIR)).bin
 
 # Tool path
-TOOLROOT=../tools/bin
+TOOLROOT=/usr/bin
 
 # Library path
-LIBROOT=../libraries
+LIBROOT=/home/jared/Classwork/C335/C335-Spring2020/libraries/STM32F3-Discovery_FW_V1.1.0
 
 # Tools
 CC_0 = @echo -n "Compiling $< "; $(CC_1)
