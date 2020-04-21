@@ -3,3 +3,5 @@ c335.mk
 **/*.d
 **/*.elf
 **/*.log
+**/*.c~
+**/Makefile~

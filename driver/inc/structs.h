@@ -7,7 +7,7 @@ struct enemy {
 	uint16_t color; //red 0x001F
 
 	//life
-	int life;
+	int life; //1 if alive, 0 if dead
 
 	//coordinates
 	int x1,x2; //x1 is left, x2 is right
