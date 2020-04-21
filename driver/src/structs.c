@@ -1,29 +1,34 @@
 /*
     Aliens
         Only bottom row aliens shoot (randomly?)
-        Center dot that all aliens are positioned according to. If dot shifts, then redraw alien shifted according to relation to dot (if dots shifts, alien shifts)
-        
+        color
 
 Bullets
     Thin vertical line, if x and y dimensions of the line intersect with any part of the area of the line, it will destroy what it hits
-    Moves in a
- 
+    Moves in a motion of 3 angles. straight, angled left, angled right. 
+	should angle towards player 
 
     Player
-        Lives left, movement left and right , player score
+        color, Lives left, level, player score
 */
 
 #include <structs.h>
 
 /*//// Collisions ////*/
 
+//TODO should this function be void? or is there another check that needs to be done afterwards
 int checkEnemyCollision(struct bullet b, struct enemy e) {
-	if (ifCollision(b.x,b.y,e.x,e.y,e.life)) { e.life = 0; }
+	//if collision, set life to 0 and return 1 (for true)
+	if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1,e.y2, e.life)) { 
+		e.life = 0;
+		return 1; //true, there was a collision
+	}
+	return 0; //false, no collision
 }
 
 //checks coordinates, struct type
 int checkPlayerCollision(struct bullet b, struct player p) {
-	if (ifCollision(b.x,b.y,p.x,p.y,p.life)) { 
+	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p.x1,p.x2, p.y1,p.y2, p.life)) { 
 		--p.lives;
 		if (p.lives <= 0) {
 			p.life = 0;
@@ -33,9 +38,7 @@ int checkPlayerCollision(struct bullet b, struct player p) {
 	return 0; //false, no collision
 }
 
-
-
-bool ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2, int life) {
+int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2, int life) {
 
 
 	//if life is false, don't check
@@ -60,7 +63,7 @@ bool ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int
 	else { return 1; }
 }
 
-bool pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
+int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
 	if (x > x1 && x < x2 && y < y1 && y > y2) {
 		return 1; 
 	}
@@ -77,7 +80,3 @@ bool pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
  bl=(x1,y2)   br=(x2,y2)
 */
 
-
-/*//// Movement ////*/
-
-//    Sends uart serial communication, updates object coordinates based on input, firing bullets
