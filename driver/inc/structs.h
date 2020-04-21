@@ -4,7 +4,7 @@
 //enemies
 struct enemy { 
 	//ship - image/color
-  uint16_t color = 0x001F;//red
+	uint16_t color = 0x001F;//red
 
 	//life
 	int life = 1;
@@ -18,7 +18,7 @@ struct enemy {
 //bullet
 struct bullet { 
 	//bullet - image/color
-  uint16_t color = 0xFFFF; //white
+	uint16_t color = 0xFFFF; //white
 
 	//coordinates (it is a vertical line, so no x coord)
 	int x1,x2; //x1 is left, x2 is right
@@ -31,22 +31,21 @@ struct bullet {
 
 //player
 struct player { 
-  //ship - image/color
-  uint16_t color = 0xF800; //blue
+	//ship - image/color
+	uint16_t color = 0xF800; //blue
 
-  //lives
-  int lives = 3;
+	//lives
+	int lives = 3;
+	int life = 1;
 
-  int life = 1;
+	//coordinates
+	int x1,x2; //x1 is left, x2 is right
+	int y1,y2; //y1 is top, y2 is bottom
 
-  //coordinates
-  int x1,x2; //x1 is left, x2 is right
-  int y1,y2; //y1 is top, y2 is bottom
-
-  //score
-  int score = 0;
-  //level
-  int level = 1;
+	//score
+	int score = 0;
+	//level
+	int level = 1;
 };
 
 

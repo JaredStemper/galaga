@@ -28,7 +28,9 @@ int checkPlayerCollision(struct bullet b, struct player p) {
 		if (p.lives <= 0) {
 			p.life = 0;
 		}
+		return 1; //true, there was a collision
 	}
+	return 0; //false, no collision
 }
 
 
@@ -37,7 +39,7 @@ bool ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int
 
 
 	//if life is false, don't check
-  if(!life) { return 0; }
+	if(!life) { return 0; }
 	//if tl
 	else if(pointInRectangle(bx1, by1, x1, x2, y1, y2)) {
 		return 1;
