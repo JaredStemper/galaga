@@ -25,20 +25,26 @@ void drawBackground(struct player p){
   sprintf(level, "Score: %d", p.score);
   f3d_lcd_drawString(45,5,level,WHITE,BLACK);
  
-// f3d_lcd_drawString();
 }
 
 void drawPlayer(struct player p){
-  
+  drawRect(p.x1, p.y1, p.y2, p.x2, RED);
 }
 
 //function to draw single enemy or array of enemies?
 	//need a function to draw a single one, and then draw the array of them
 void drawEnemy(struct enemy e){
+   drawRect(e.x1, e.y1, e.y2, e.x2, BLUE);
 }
 
-//void drawEnemyArray();
+void drawEnemies(struct enemy e[]){
+  int l = sizeof e/sizeof e[0];
+  int i;
+  for(i=0;i<l;i++){
+     drawRect(e[i].x1, e[i].y1, e[i].y2, e[i].x2, BLUE);
+  }
+}
 
 void drawBullet(int x, int y, uint16_t color){
-  drawBar_vertical(x,y,y+3,color);
+  drawRect(x,y,y+3,x+2,color);
 }
