@@ -1,0 +1,6 @@
+/*
+screen.c:
+	Background (all black.. Add blues later), level (bottom right), lives at the bottom left, player ship, bullets, Enemies
+Gets info for level, lives, player ship, and enemy ships from struct.c
+
+*/
