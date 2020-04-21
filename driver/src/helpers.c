@@ -4,25 +4,30 @@
 #include <math.h>
 #include <f3d_lcd_sd.h>
 
-float radianToDegree(float rad){return rad*180/M_PI; }
+/*/// Drawing shapes  ///*/
 
-float get_pitch(float accel_data[]){
-  float pitch;
-  pitch = atanf(accel_data[0]/ (sqrt(pow(accel_data[1],2)+pow(accel_data[2],2))));
-  return pitch;
-}
-float get_roll(float accel_data[]){
-  float roll;
-  roll = atanf(accel_data[1]/ (sqrt(pow(accel_data[0],2)+pow(accel_data[2],2))));
-  return roll;
+void drawRect(int start_x, int start_y, int end_y, int end_x, uint16_t colour){
+
+  if(start_y>end_y){
+    int i;
+    int j = 0;
+
+    for(j; j<= end_x; j++) {
+      for(i=start_y; i>=end_y; i--){
+        f3d_lcd_drawPixel(start_x+j, i, colour);
+      }
+    } 
+  }   
+  int i;
+  int j = 0;
+
+  for(j; j<= end_x; j++) {
+    for(i=start_y; i<=end_y; i++){
+      f3d_lcd_drawPixel(start_x+j, i, colour);
+    }
+  }
 }
 
-float get_heading(float mag_data[]){
-  float heading;  
-  heading = radianToDegree(atan2f(mag_data[1],mag_data[0]));
-  heading = heading + 180;
-  return heading;
-}
 
 void drawBar_vertical(int start_x, int start_y ,int end ,uint16_t colour){
   
@@ -56,6 +61,48 @@ void drawBar_horizontal(int start_x, int start_y ,int end ,uint16_t colour){
     }
 }
 
+void drawBar(int start_x, int start_y ,int end ,uint16_t colour){
+  
+  if(start_y>end){
+    int i;
+    for(i=start_y; i>=end; i--){
+      f3d_lcd_drawPixel(start_x, i, colour); f3d_lcd_drawPixel(start_x+2, i, colour);
+      f3d_lcd_drawPixel(start_x+1, i, colour);f3d_lcd_drawPixel(start_x+3, i, colour);
+    }
+  }
+  int i;
+  for(i=start_y; i<=end; i++){
+    f3d_lcd_drawPixel(start_x, i, colour); f3d_lcd_drawPixel(start_x+2, i, colour);
+    f3d_lcd_drawPixel(start_x+1, i, colour);f3d_lcd_drawPixel(start_x+3, i, colour);
+  }
+  
+}
+
+
+
+
+/*/// Accelerometer ///*/
+
+float radianToDegree(float rad){return rad*180/M_PI; }
+
+float get_pitch(float accel_data[]){
+  float pitch;
+  pitch = atanf(accel_data[0]/ (sqrt(pow(accel_data[1],2)+pow(accel_data[2],2))));
+  return pitch;
+}
+float get_roll(float accel_data[]){
+  float roll;
+  roll = atanf(accel_data[1]/ (sqrt(pow(accel_data[0],2)+pow(accel_data[2],2))));
+  return roll;
+}
+
+float get_heading(float mag_data[]){
+  float heading;  
+  heading = radianToDegree(atan2f(mag_data[1],mag_data[0]));
+  heading = heading + 180;
+  return heading;
+}
+
 int x_cen=63; int y_cen=79;
 int x_min=0; int y_min = 0;
 int x_max=127; int y_max = 159;
@@ -80,6 +127,8 @@ void angle_visual(float pitch, float roll){
   } 
 }
 
+
+/*/// Compass ///*/
 
 void compass_visual(float heading){
   int nx = 63; int sx = 63; int ex = 63+40; int wx = 63-40;
@@ -146,22 +195,6 @@ void compass_visual(float heading){
 }
 
 
-void drawBar(int start_x, int start_y ,int end ,uint16_t colour){
-  
-  if(start_y>end){
-    int i;
-    for(i=start_y; i>=end; i--){
-      f3d_lcd_drawPixel(start_x, i, colour); f3d_lcd_drawPixel(start_x+2, i, colour);
-      f3d_lcd_drawPixel(start_x+1, i, colour);f3d_lcd_drawPixel(start_x+3, i, colour);
-    }
-  }
-  int i;
-  for(i=start_y; i<=end; i++){
-    f3d_lcd_drawPixel(start_x, i, colour); f3d_lcd_drawPixel(start_x+2, i, colour);
-    f3d_lcd_drawPixel(start_x+1, i, colour);f3d_lcd_drawPixel(start_x+3, i, colour);
-  }
-  
-}
 int y_upper=35;
 int y_lower=152;
 int vert_mid=92;
@@ -261,29 +294,8 @@ void displayGyroGraph(float x_pos, float y_pos, float z_pos){
   }
 }
 
-void nunchuk_tilt_visual(int x, int y, int z){
-  int roll = atan(y/(sqrt((x*x)+(z*z))));
-  int pitch = atan(x/(sqrt((y*y)+(z*z))));
-    
-  /*  if(0>pitch){
-    drawBar_vertical(x_cen, y_cen+4, y_max, CYAN);
-    drawBar_vertical(x_cen, y_cen-4, y_min, BLACK);
-  }
-  if(0<pitch){
-    drawBar_vertical(x_cen, y_cen-4, y_min, CYAN);
-    drawBar_vertical(x_cen, y_cen+4, y_max, BLACK);
-  }
 
-  if(0>roll){
-    drawBar_horizontal(x_cen+4, y_cen, x_max, GREEN);
-    drawBar_horizontal(x_cen-4, y_cen, x_min, BLACK);
-  }
-  if(0<roll){
-    drawBar_horizontal(x_cen-4, y_cen, x_min, GREEN);
-    drawBar_horizontal(x_cen+4, y_cen, x_max, BLACK);
-    } */
-  
-}
 
 
 /*helpers.c ends here*/
+
