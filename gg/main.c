@@ -20,6 +20,9 @@ int main(){
   f3d_lcd_init();
   struct player p1;
   p1.level = 3;
+  p1.score = 0;
+  p1.lives = 3;
+
   //while(1){
   drawBackground(p1);
   //}
