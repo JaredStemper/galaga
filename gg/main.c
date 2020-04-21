@@ -12,9 +12,16 @@
 #include <f3d_i2c.h>
 #include <f3d_delay.h>
 #include <f3d_uart.h>
+#include <screen.h>
+#include <helpers.h>
+#include <structs.h>
 
 int main(){
   f3d_lcd_init();
+  struct player p1;
+  p1.level = 3;
+
+  drawBackground(p1);
   
   
 }

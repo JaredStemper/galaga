@@ -7,12 +7,16 @@ Gets info for level, lives, player ship, and enemy ships from struct.c
 #include <f3d_lcd_sd.h>
 
 
-void drawBackground(){
+
+char level[10];
+void drawBackground(struct player p){
   f3d_fillScreen2(BLACK);
   //display level
-
+  sprintf(level, "Level: %d", p.level);
+  f3d_lcd_drawString(120,154,level,WHITE,BLACK);
   //display lives
   
+  f3d_lcd_drawString();
 }
 
 void drawPlayer(struct player p){
