@@ -1,5 +1,5 @@
 /*
-* main.c for lab 7
+* main.c for galaga
 * Author(s)/Editor(s): Kunal Atul Pendse, Jared Stemper, Ray Lopez
 */
 
@@ -22,21 +22,18 @@ int main(){
   p1.level = 3;
   p1.score = 0;
   p1.lives = 3;
-  p1.x1 = 63; p1.y1 = 130;
-  p1.x1 = 67; p1.y2 = 140;
+  p1.x1 = 63+10; p1.y1 = PLAYER_Y1;
+  p1.x2 = 67+10; p1.y2 = PLAYER_Y2;
 
   struct enemy e1;
   e1.x1 = 63; e1.y1 = 30;
   e1.x2 = 67; e1.y2 = 40;
-
   
-  //f3d_lcd_fillScreen2(BLACK);
   drawBackground(p1);
   drawPlayer(p1);
   drawEnemy(e1);
-  drawBullet(65, 50, CYAN);
-  
-  
+  drawBullet(63, 100, CYAN);
+    
 }
 
 

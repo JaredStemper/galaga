@@ -28,23 +28,23 @@ void drawBackground(struct player p){
 }
 
 void drawPlayer(struct player p){
-  drawRect(p.x1, p.y1, p.y2, p.x2, RED);
+  drawRect(p.x1, p.y1, p.x2, p.y2, RED);
 }
 
 //function to draw single enemy or array of enemies?
 	//need a function to draw a single one, and then draw the array of them
 void drawEnemy(struct enemy e){
-   drawRect(e.x1, e.y1, e.y2, e.x2, BLUE);
+   drawRect(e.x1, e.y1, e.x2, e.y2, BLUE);
 }
 
-void drawEnemies(struct enemy e[]){
+void drawEnemies(struct enemy *e){
   int l = sizeof e/sizeof e[0];
   int i;
   for(i=0;i<l;i++){
-     drawRect(e[i].x1, e[i].y1, e[i].y2, e[i].x2, BLUE);
+     drawRect(e[i].x1, e[i].y1, e[i].x2, e[i].y2, BLUE);
   }
 }
 
 void drawBullet(int x, int y, uint16_t color){
-  drawRect(x,y,y+3,x+2,color);
+  drawRect(x,y,x+2,y+4,color);
 }

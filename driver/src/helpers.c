@@ -6,26 +6,14 @@
 
 /*/// Drawing shapes  ///*/
 
-void drawRect(int start_x, int start_y, int end_y, int end_x, uint16_t colour){
+void drawRect(int start_x, int start_y, int end_x, int end_y, uint16_t colour){	
+	int i,j;
+	for(i=start_y;i<=end_y;i++){
+		for(j=start_x;j<=end_x;j++){
+			f3d_lcd_drawPixel(j,i,colour);
+		}
+	}
 
-  if(start_y>end_y){
-    int i;
-    int j = 0;
-
-    for(j; j<= end_x; j++) {
-      for(i=start_y; i>=end_y; i--){
-        f3d_lcd_drawPixel(start_x+j, i, colour);
-      }
-    } 
-  }   
-  int i;
-  int j = 0;
-
-  for(j; j<= end_x; j++) {
-    for(i=start_y; i<=end_y; i++){
-      f3d_lcd_drawPixel(start_x+j, i, colour);
-    }
-  }
 }
 
 

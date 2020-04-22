@@ -1,5 +1,7 @@
 #include <f3d_lcd_sd.h>
 
+#define PLAYER_Y1 137
+#define PLAYER_Y2 147
 
 //enemies
 struct enemy { 
