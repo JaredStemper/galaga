@@ -1,6 +1,6 @@
 /*
 * main.c for galaga
-* Author(s)/Editor(s): Kunal Atul Pendse, Jared Stemper, Ray Lopez
+* Author(s)/Editor(s): Kunal Atul Pendse, Jared Stemper
 */
 
 //#include <stdio.h>
