@@ -1,0 +1,16 @@
+we have an array of ptrs to enemies (only ever going to have 30 enemies).
+
+if we want to use 
+
+if we want to remove an enemy, 
+
+/*
+enemyarr[30]
+
+enemyArray-- //shifts "dead" enemy to end of array
+enemyArray-- 
+
+realloc(28)
+*/
+
+is this worth the trouble to remove enemies from array?

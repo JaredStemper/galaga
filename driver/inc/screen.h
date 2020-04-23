@@ -2,12 +2,15 @@
 #include <structs.h>
 #include <helpers.h>
 
-void drawBackground(struct player p);
 
-void drawPlayer(struct player p);
+void drawStartScreen(void);
 
-void drawEnemy(struct enemy e);
+void drawBackground(struct player *p);
 
-//void drawEnemyArray();
+void drawPlayer(struct player *p);
 
-void drawBullet(int x, int y, uint16_t color);
+void drawEnemy(struct enemy *e);
+
+void drawEnemies(struct enemy *e[]);
+
+void drawBullet(struct bullet *b);

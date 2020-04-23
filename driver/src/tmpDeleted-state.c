@@ -1,13 +1,4 @@
 /*
-* main.c for galaga
-* Author(s)/Editor(s): Kunal Atul Pendse, Jared Stemper
-*/
-
-
-
-
-
-/*
 init()
 	Starts with 0 score, 3 lives, etc.
 Start screen
@@ -39,14 +30,11 @@ void start(void){
 	//set all values of arrayLiveEnemies and usedEnemyPosiitons to zero (for more info look at lines 28-32 in structs.h)
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 
-	
+
+	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies
+
 	//draw GALAGA text and instructions how to play
 	drawStartScreen(); delay(10000);
-
-
-//	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies
-	
-	
 	
 	//if user hits space bar, then break
 //	while(1) {}
@@ -102,11 +90,11 @@ int game(void){
 	//also initializes all hardware components
 	start();
 
-	static int state = SETT;
+	static int state = SET;
 	
 //	while(1) {
 		switch(state) {
-		case SETT: //set or reset initial player/enemy values of the game
+		case SET: //set or reset initial player/enemy values of the game
 			init_game();
 			state = GAME;
 			break;
@@ -124,16 +112,3 @@ int game(void){
 }
 
 int main(void) { game(); return 1; }
-
-
-/*
-* main.c for galaga
-* Author(s)/Editor(s): Kunal Atul Pendse, Jared Stemper
-*/
-
-void assert_failed(uint8_t* file, uint32_t line) {
-/* Infinite loop */
-/* Use GDB to find out why we're here */
-  while (1);
-}
-
