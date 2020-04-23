@@ -3,7 +3,8 @@
 #define PLAYER_Y1 137
 #define PLAYER_Y2 147
 
-#define MAX_ENEMY 30
+#define MAX_ENEMY 5 //make sure that there are 30 available positions when changing max_enemy back to 30
+ 
 
 #define CENTERX 63
 #define CENTERY 40
@@ -27,7 +28,10 @@ struct enemy {
 
 struct enemy *enemyArray[MAX_ENEMY];
 
-int enemyPositions[5][2] = {{CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10}};
+//int enemyPositions[5][2] =     {{CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10},
+//				{CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY},
+
+//};
 //TODO: make 30 unique positions
 
 

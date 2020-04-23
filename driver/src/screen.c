@@ -68,7 +68,7 @@ void drawEnemy(struct enemy *e){
 
 
 void drawEnemies(struct enemy *e[]){
-  int l = (int) sizeof(e)/sizeof(e[0]);  //TODO fix this line
+  int l = (int) sizeof(e)/sizeof(e[0]); 
   int i;
   for(i=0;i<l;i++){
      drawEnemy(e[i]);  //drawRect(e[i].x1, e[i].y1, e[i].x2, e[i].y2, BLUE);

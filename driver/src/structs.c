@@ -120,7 +120,7 @@ int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
 void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray[]) {
   int i = 0;		
   //find location in arrayLiveEnemies that is empty/dead, and place enemy
-  for (int j = 0; j < MAX_ENEMY; j++) {
+  for (int j = 0; j < MAX_ENEMY; j++) { 
     //if enemy is dead, make new enemy
     if(!locationArray[j]) {
       i++;	
@@ -133,13 +133,13 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
       struct enemy *ePtr = &e;
       enemyArray[j] = ePtr;
 
-      //set location for new enemy
+      //set location for new enemy using reference to struct object 
       e.locationIndex = j;
-      e.x1 = enemyPositions[j][0];
-      e.x2 = e.x1 + ENEMY_WIDTH;
-      e.y1 = enemyPositions[j][1];
-      e.y2 = e.y1 + ENEMY_HEIGHT;
-				
+//      e.x1 = enemyPositions[j][0];
+//      e.x2 = e.x1 + ENEMY_WIDTH;
+//      e.y1 = enemyPositions[j][1];
+//      e.y2 = e.y1 + ENEMY_HEIGHT;
+
       e.life = 1;
       e.color = 0x001F;
     }
