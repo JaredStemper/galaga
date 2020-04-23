@@ -135,11 +135,14 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
 
       //set location for new enemy using reference to struct object 
       e.locationIndex = j;
-//      e.x1 = enemyPositions[j][0];
-//      e.x2 = e.x1 + ENEMY_WIDTH;
-//      e.y1 = enemyPositions[j][1];
-//      e.y2 = e.y1 + ENEMY_HEIGHT;
 
+      int bob = enemyPositions[0][0];
+/*
+      e.x1 = enemyPositions[j][0];
+      e.x2 = e.x1 + ENEMY_WIDTH;
+      e.y1 = enemyPositions[j][1];
+      e.y2 = e.y1 + ENEMY_HEIGHT;
+*/
       e.life = 1;
       e.color = 0x001F;
     }
