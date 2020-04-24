@@ -11,6 +11,6 @@ void drawPlayer(struct player *p);
 
 void drawEnemy(struct enemy *e);
 
-void drawEnemies(struct enemy *e[]);
+void drawEnemies(struct enemy *e[], int liveEnemy[]);
 
 void drawBullet(struct bullet *b);

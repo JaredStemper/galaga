@@ -6,7 +6,6 @@ Gets info for level, lives, player ship, and enemy ships from struct.c
 
 */
 #include <screen.h>
-
 /*
 }
 move arrayenemies {
@@ -29,8 +28,9 @@ move arrayenemies {
 
 void drawStartScreen(void){
 	f3d_lcd_fillScreen2(BLACK);
-	f3d_lcd_drawString(60,70, "GALAGA", RED,BLACK);
-	f3d_lcd_drawString(60,90,"press SPACE to play", WHITE, BLACK);
+	f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK);
+	f3d_lcd_drawString(30,90,"press SPACE", WHITE, BLACK);
+	f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
 } 
 
 
@@ -60,20 +60,27 @@ void drawPlayer(struct player *p){
   drawRect(p->x1, p->y1, p->x2, p->y2, RED);
 }
 
-//function to draw single enemy or array of enemies?
-	//need a function to draw a single one, and then draw the array of them
 void drawEnemy(struct enemy *e){
    drawRect(e->x1, e->y1, e->x2, e->y2, BLUE);
 }
 
+/*
+e[] = { struct enemy e1,e2,e3}
 
-void drawEnemies(struct enemy *e[]){
-  int l = (int) sizeof(e)/sizeof(e[0]); 
-  int i;
-  for(i=0;i<l;i++){
-     drawEnemy(e[i]);  //drawRect(e[i].x1, e[i].y1, e[i].x2, e[i].y2, BLUE);
+liveenemy = {0,1,1,1,0,0,0,0}
+
+enemyPosition= {{1,2}{2,3}{1,3}{2,1}{1,1}}
+*/ 
+//uses current list of enemy locations to determine the index of live enemies
+void drawEnemies(struct enemy *e[], int liveEnemy[]){
+  for (int i=0; i<30; i++) {
+	if (liveEnemy[i]) {
+		drawEnemy(e[i]);
+	}
   }
 }
+
+
 
 void drawBullet(struct bullet *b){
    drawRect(b->x1, b->y1, b->x2, b->y2, CYAN);

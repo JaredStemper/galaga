@@ -35,7 +35,6 @@
 /* Code: */
 
 #include <f3d_systick.h>
-#include <f3d_led.h> 
 #include <f3d_user_btn.h>
 #include <f3d_uart.h>
 
@@ -43,7 +42,6 @@ volatile int systick_flag = 0;
 
 int ips = 12;
 
-int led = 0; //0-8 incrememnt. turn off increment and turn on
 
 void f3d_systick_init(void) {
 /*
@@ -76,21 +74,15 @@ void SysTick_Handler(void) {
 
 //basically main, when the button is pressed, slow down
     
-	if(!user_btn_read()) {
-		ips = 100;
+//	if(!user_btn_read()) {
+//		ips = 100;
 		SysTick_Config(SystemCoreClock/ips);
-	}
-	else {
+//	}
+//	else {
 		ips = 12;
-		SysTick_Config(SystemCoreClock/ips);		
-	}	
+//		SysTick_Config(SystemCoreClock/ips);		
+//	}	
 
-	//0-8 incrememnt. turn off increment and turn on
-	//led off
-	f3d_led_all_off();
-
-	//led increment and led on
-	f3d_led_on(++led % 8);
 	
 }
 

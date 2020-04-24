@@ -26,14 +26,10 @@ struct enemy {
 	int y1,y2; //y1 is top, y2 is bottom
 }; // Enemy;
 
+
+
+
 struct enemy *enemyArray[MAX_ENEMY];
-
-//int enemyPositions[5][2] =     {{CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10},
-//				{CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY}, {CENTERX,CENTERY},
-
-//};
-//TODO: make 30 unique positions
-
 
 int usedEnemyPositions[MAX_ENEMY];
 
@@ -98,3 +94,6 @@ int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2);
 
 void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray[]);
 
+void initArr(void);
+
+int enemyPositions[30][2];

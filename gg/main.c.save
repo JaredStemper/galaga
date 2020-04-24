@@ -24,30 +24,29 @@ Game end
 
 	show score, hit space to play again (runs init()) and goes to during game
 */
-#include <stm32f30x.h>
+#include <f3d_user_btn.h>
 #include <f3d_accel.h>
 #include <f3d_mag.h>
 #include <f3d_i2c.h>
 #include <f3d_delay.h>
-#include <f3d_systick.h>
-#include "queue.h"
 #include <f3d_uart.h>
 #include <screen.h>
 #include <state.h>
 
 void start(void){
 	f3d_lcd_init();
-	f3d_uart_init();
-	f3d_systick_init();
 
 	//set all values of arrayLiveEnemies and usedEnemyPosiitons to zero (for more info look at lines 28-32 in structs.h)
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 
+	
 	//draw GALAGA text and instructions how to play
-	drawStartScreen(); 
+	drawStartScreen(); delay(10000);
 
 
-
+	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies
+	
+	
 	
 	//if user hits space bar, then break
 //	while(1) {}
@@ -77,59 +76,20 @@ void init_game(void){
 	b1.x2 = b1.x1+2;
 	b1.y1 = 100;
 	b1.y2 = b1.y1+4;
+	drawBullet(bPtr);
 
 	//create new initial enemy
 	struct enemy e1;
 	struct enemy *ePtr = &e1;
-	e1.x1 = 63;
-	e1.x2 = e1.x1+4;
-	e1.y1 = PLAYER_Y1;
-	e1.y2 = PLAYER_Y2;
 	e1.color = 0x001F;
 	e1.life = 1;
-
-
-	struct enemy e2;
-	struct enemy *e2Ptr = &e2;
-	e2.x1 = 43;
-	e2.x2 = e2.x1+4;
-	e2.y1 = PLAYER_Y1-20;
-	e2.y2 = PLAYER_Y2-20;
-	e2.color = 0x001F;
-	e2.life = 1;
-
-
-
 	//create initial array of enemies
 
-	enemyArray[0] = &e1;
-	enemyArray[1] = &e2;
 
-	usedEnemyPositions[0]=1;
-	usedEnemyPositions[1]=1;
-
-//	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
-		
 	drawBackground(pPtr);
-
-	drawEnemies(enemyArray, usedEnemyPositions); //draw enemies that are marked as alive
-
+	drawPlayer(pPtr);
+	drawEnemy(ePtr);
 	drawBullet(bPtr); //TODO: create shoot function
-
-
-/*
-//while loop used to test value of characters using screen
-while(1){
-	for (int i=0; i<5; i++) {
-		printf("### %d: %d ###",enemyArray[i]->locationIndex);
-	}
-}
-*/
-//		putchar(enemyArray[i]->locationIndex + '0');
-//		putchar(usedEnemyPositions[i]+'0'); //given ascii value of character, it gets confused. 
-			//instead give it the integer and then typcast it using a following character
-//		printf("%d",usedEnemyPositions[i]);
-	
 
 
 }

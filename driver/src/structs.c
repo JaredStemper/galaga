@@ -13,9 +13,10 @@
 */
 
 #include <structs.h>
+#include <f3d_uart.h>
+
 
 /*//// Collisions ////*/
-
 
 //should this function be void? or is there another check that needs to be done afterwards -> doing this because it makes testing easier
 int checkEnemyCollision(struct bullet *b, struct enemy *e) {
@@ -106,27 +107,30 @@ int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
 
 */
 
-/*
+int enemyPositions[30][2] = {
+    {CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10},
+    {CENTERX-20,CENTERY+20}, {CENTERX+20,CENTERY-20}, {CENTERX-20,CENTERY-20}, {CENTERX+20,CENTERY+20},
 
-  TODO:
-  set aliveIndex
-  set locationIndex
+    {CENTERX,CENTERY+10}, {CENTERX-10,CENTERY+20}, {CENTERX-10,CENTERY-20}, {CENTERX+10,CENTERY-20}, {CENTERX+10,CENTERY+20},
+    {CENTERX,CENTERY-10}, {CENTERX-20,CENTERY+10}, {CENTERX-20,CENTERY-10}, {CENTERX+20,CENTERY-10}, {CENTERX+20,CENTERY+10},
 
-  add to livearray
-  add to enemyarray
-*/
+    {CENTERX-10,CENTERY}, {CENTERX,CENTERY+20}, {CENTERX,CENTERY-20}, {CENTERX-20,CENTERY}, {CENTERX+20,CENTERY},
+    {CENTERX+10,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX-30,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX,CENTERY-30},
 
-	
+    {CENTERX+10,CENTERY+30}
+  };
+
 void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray[]) {
   int i = 0;		
   //find location in arrayLiveEnemies that is empty/dead, and place enemy
   for (int j = 0; j < MAX_ENEMY; j++) { 
     //if enemy is dead, make new enemy
-    if(!locationArray[j]) {
+   if(!locationArray[j]) {
       i++;	
 			
       //update locationArray
       locationArray[j] = 1;
+
 
       //create enemy and ptr to it
       struct enemy e;
@@ -134,24 +138,25 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
       enemyArray[j] = ePtr;
 
       //set location for new enemy using reference to struct object 
-      e.locationIndex = j;
+      ePtr->locationIndex = j;
+  
+      ePtr->x1 = enemyPositions[i][0];
+      ePtr->x2 = ePtr->x1 + ENEMY_WIDTH;
+      ePtr->y1 = enemyPositions[i][1];
+      ePtr->y2 = ePtr->y1 + ENEMY_HEIGHT;
 
-      int bob = enemyPositions[0][0];
-/*
-      e.x1 = enemyPositions[j][0];
-      e.x2 = e.x1 + ENEMY_WIDTH;
-      e.y1 = enemyPositions[j][1];
-      e.y2 = e.y1 + ENEMY_HEIGHT;
-*/
-      e.life = 1;
-      e.color = 0x001F;
+      ePtr->life = 1;
+      ePtr->color = 0x001F;
+
     }
     else if(j == MAX_ENEMY-1) {
       // printf("Went over max_enemy amount");
-      break; }
+      break; 
+    }
 
-    if(i == numOfEnemies) { break; } 
+    if(i == numOfEnemies) { break; } //after iterating numOfEnemies times, break
 
 		
   }
 } 
+
