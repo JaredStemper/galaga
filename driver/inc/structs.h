@@ -12,6 +12,9 @@
 #define ENEMY_WIDTH 4
 #define ENEMY_HEIGHT 4
 
+#define BULLET_WIDTH 2
+#define BULLET_HEIGHT 6
+
 //enemies
 struct enemy { 
 	//ship - image/color

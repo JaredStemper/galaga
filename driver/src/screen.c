@@ -90,19 +90,50 @@ void drawBullet(struct bullet *b){
 
 
 void drawBullets(struct bullet *b[], int liveBullet[]){
-
-
-
+  for(int i=0; i<MAX_BULLET; i++){
+    if(liveBullet[i]){
+      drawBullet(b[i]);
+    }
+  }
 }
 
 /*
- * makes a bullet at player position
- * decrements y position of the bullet (bullet goes up straight)
+ * makes ONE bullet at player position and adds it to bulletArray(which is globally defined)
  * TODO: add same functionality for enemy
+ * TODO: add to .h file
 */
-//void shoot(){
+void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int liveBullets[]){
+  int x = (playerPtr->x1 / playerPtr->x2)/2;
+  int y = playerPtr->y1;
 
-//}
+  struct bullet *bulletPointer;
+  bulletPointer->x1 = x;
+  bulletPointer->x2 = x+BULLET_WIDTH;
+  bulletPointer->y1 = y;
+  bulletPointer->y2 = y+BULLET_HEIGHT;
+  bulletPointer->color = 0xFFFF;
+  bulletPointer->shooter = 1;
+
+  for(int j=0; j<BULLET_MAX, j++){
+    if(!liveBullets[j]){
+      liveBullets[j] = 1;
+      bulletArray[j] = &bulletPointer;
+      break;
+    } else{j++;}
+  }  
+  
+}
+/*
+ * TODO: add to .h file
+ * TODO: add attribute alive to struct bullet
+ */
+void shoot(struct bullet *bulletPointer){
+  while(bulletPointer->y1 < 0 || bulletPointer->alive = 0){
+    bulletPointer->y1 = bulletPointer->y1 - 3;
+    bulletPointer->y2 = bulletPointer->y2 - 3;
+    //delay(1000); //should we do this? // need to have the bullet go up little by little
+  }  
+}
 
 //void movePlayer(){
 //}
