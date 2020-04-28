@@ -14,3 +14,7 @@ void drawEnemy(struct enemy *e);
 void drawEnemies(struct enemy *e[], int liveEnemy[]);
 
 void drawBullet(struct bullet *b);
+
+void drawBullets(struct bullet *b[], int liveBullet[]);
+
+void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet *b[], int liveBullet[]);

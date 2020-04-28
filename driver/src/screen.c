@@ -60,6 +60,7 @@ void drawPlayer(struct player *p){
   drawRect(p->x1, p->y1, p->x2, p->y2, RED);
 }
 
+
 void drawEnemy(struct enemy *e){
    drawRect(e->x1, e->y1, e->x2, e->y2, BLUE);
 }
@@ -86,14 +87,31 @@ void drawBullet(struct bullet *b){
    drawRect(b->x1, b->y1, b->x2, b->y2, CYAN);
 }
 
+
+
+void drawBullets(struct bullet *b[], int liveBullet[]){
+
+
+
+}
+
 /*
  * makes a bullet at player position
  * decrements y position of the bullet (bullet goes up straight)
  * TODO: add same functionality for enemy
 */
-void shoot(){
+//void shoot(){
 
-}
+//}
 
-void movePlayer(){
+//void movePlayer(){
+//}
+
+//after collision, bullet array marks bullet index as 0
+
+void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet *b[], int liveBullet[]) {
+	drawBackground(playerPtr);
+	drawPlayer(playerPtr);
+	drawEnemies(e,liveEnemy);
+	drawBullets(b,liveBullet);
 }

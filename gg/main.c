@@ -42,6 +42,7 @@ void start(void){
 
 	//set all values of arrayLiveEnemies and usedEnemyPosiitons to zero (for more info look at lines 28-32 in structs.h)
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
+	for (int i = 0; i < MAX_BULLET; i++) { usedBulletPositions[i] = 0; }
 
 	//draw GALAGA text and instructions how to play
 	drawStartScreen(); 
@@ -58,7 +59,6 @@ void start(void){
 }
 void init_game(void){
 	//create new player
-	struct player p1;
 	struct player *pPtr = &p1;
 
 	p1.color = 0xF800;
@@ -68,7 +68,7 @@ void init_game(void){
 	p1.x2 = p1.x1+4;
 	p1.y1 = PLAYER_Y1;
 	p1.y2 = PLAYER_Y2;
-	p1.score = 0;
+	p1.score = 66;
 	p1.level = 0;
 
 
@@ -110,13 +110,11 @@ void init_game(void){
 	usedEnemyPositions[0]=1;
 	usedEnemyPositions[1]=1;
 
+	bulletArray[0] = &b1;
+	usedBulletPositions[0]=1;
+
 //	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
 		
-	drawBackground(pPtr);
-
-	drawEnemies(enemyArray, usedEnemyPositions); //draw enemies that are marked as alive TODO test that "dead" enemy is not drawn
-
-	drawBullet(bPtr); //TODO: create shoot function
 
 
 /*
@@ -140,13 +138,13 @@ void end(void){
 
 }
 int game(void){
-	//set screen to "start game display" that shows game title, basic instructions, and waits for user to enter a space to begin
+	//game() sets screen to "start game display" that shows game title, basic instructions, and waits for user to enter a space to begin
 	//also initializes all hardware components
 	start();
 
 	static int state = SETT;
 	
-//	while(1) {
+	while(1) {
 		switch(state) {
 		case SETT: //set or reset initial player/enemy values of the game
 			init_game();
@@ -154,14 +152,23 @@ int game(void){
 			break;
 		case GAME: //
 			//check for collisions
+			//TODO: checkCollision();
+
 			//check for input
+
 			//move objects
+
+
+			//update display
+			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
+
+
+	
 			break;
 		//case PAUSE: //pauses game "time"
 		//case EXIT: //ends and exits game
 		}
-		//update display
-//	}
+	}
 
 }
 

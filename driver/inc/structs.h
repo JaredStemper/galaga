@@ -4,7 +4,7 @@
 #define PLAYER_Y2 147
 
 #define MAX_ENEMY 5 //make sure that there are 30 available positions when changing max_enemy back to 30
- 
+#define MAX_BULLET 50 
 
 #define CENTERX 63
 #define CENTERY 40
@@ -24,7 +24,7 @@ struct enemy {
 	//coordinates
 	int x1,x2; //x1 is left, x2 is right
 	int y1,y2; //y1 is top, y2 is bottom
-}; // Enemy;
+};
 
 
 
@@ -46,7 +46,6 @@ drawenemies(pointer to array):
 		drawEnemy(structPointer)
 */
 
-//typedef struct enemy Enemy; //https://www.quora.com/What-exactly-does-typedef-do-in-C?share=1  for why i am using typedef to shorten call of struct
 
 //bullet
 struct bullet { 
@@ -58,9 +57,11 @@ struct bullet {
 	int y1,y2; //y1 is top, y2 is bottom
 
 	int shooter; //1 if player, 2 if enemy
-}; //Bullet;
+};
 
-//typedef struct bullet Bullet;
+struct bullet *bulletArray[MAX_BULLET];
+
+int usedBulletPositions[MAX_BULLET];
 
 
 //player
@@ -80,9 +81,10 @@ struct player {
 	int score; //initially set to 0
 	//level
 	int level; //initially set to 1
-};// Player;
+};
 
-//typedef struct player Player;
+struct player p1;
+struct player *pPtr;
 
 int checkEnemyCollision(struct bullet *b, struct enemy *e); //Bullet b, Enemy e);
 
