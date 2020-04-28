@@ -59,7 +59,9 @@ void start(void){
 }
 void init_game(void){
 	//create new player
-	struct player *pPtr = &p1;
+//	struct player p1;
+//	struct player *pPtr = &p1;
+	pPtr = &p1;
 
 	p1.color = 0xF800;
 	p1.lives = 3;
@@ -70,6 +72,8 @@ void init_game(void){
 	p1.y2 = PLAYER_Y2;
 	p1.score = 66;
 	p1.level = 0;
+
+//	drawBackground(pPtr);
 
 
 	//create bullet
