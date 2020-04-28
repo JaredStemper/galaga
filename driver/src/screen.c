@@ -85,3 +85,15 @@ void drawEnemies(struct enemy *e[], int liveEnemy[]){
 void drawBullet(struct bullet *b){
    drawRect(b->x1, b->y1, b->x2, b->y2, CYAN);
 }
+
+/*
+ * makes a bullet at player position
+ * decrements y position of the bullet (bullet goes up straight)
+ * TODO: add same functionality for enemy
+*/
+void shoot(){
+
+}
+
+void movePlayer(){
+}
