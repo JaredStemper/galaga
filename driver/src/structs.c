@@ -121,13 +121,13 @@ int enemyPositions[30][2] = {
   };
 
 void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray[]) {
-  int i = 0;		
+  int i = 0; //keeps track of enemies that have been successfully made		
+
   //find location in arrayLiveEnemies that is empty/dead, and place enemy
   for (int j = 0; j < MAX_ENEMY; j++) { 
     //if enemy is dead, make new enemy
    if(!locationArray[j]) {
       i++;	
-			
       //update locationArray
       locationArray[j] = 1;
 
@@ -139,8 +139,14 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
 
       //set location for new enemy using reference to struct object 
       ePtr->locationIndex = j;
+
+//	putchar(enemyArray[j]->locationIndex + '0');
+//	putchar(j + '0');
+
+
+
   
-      ePtr->x1 = enemyPositions[i][0];
+      ePtr->x1 = enemyPositions[0][0];
       ePtr->x2 = ePtr->x1 + ENEMY_WIDTH;
       ePtr->y1 = enemyPositions[i][1];
       ePtr->y2 = ePtr->y1 + ENEMY_HEIGHT;
@@ -158,5 +164,12 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
 
 		
   }
+/*	putchar('z');
+	putchar(enemyArray[0]->locationIndex + '0');
+	putchar(enemyArray[1]->locationIndex + '0');
+	putchar(enemyArray[2]->locationIndex + '0');
+	putchar(enemyArray[3]->locationIndex + '0');
+	putchar(enemyArray[4]->locationIndex + '0');
+*/
 } 
 

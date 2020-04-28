@@ -59,8 +59,6 @@ void start(void){
 }
 void init_game(void){
 	//create new player
-//	struct player p1;
-//	struct player *pPtr = &p1;
 	pPtr = &p1;
 
 	p1.color = 0xF800;
@@ -84,6 +82,7 @@ void init_game(void){
 	b1.y1 = 100;
 	b1.y2 = b1.y1+4;
 
+
 	//create new initial enemy
 	struct enemy e1;
 	struct enemy *ePtr = &e1;
@@ -104,35 +103,56 @@ void init_game(void){
 	e2.color = 0x001F;
 	e2.life = 1;
 
+	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
 
 
 	//create initial array of enemies
-
+/*
 	enemyArray[0] = &e1;
 	enemyArray[1] = &e2;
 
 	usedEnemyPositions[0]=1;
 	usedEnemyPositions[1]=1;
+*/
 
-	bulletArray[0] = &b1;
-	usedBulletPositions[0]=1;
-
-//	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
-		
-
+//while loop used to test value of characters using screen
+//while(1){
 
 /*
-//while loop used to test value of characters using screen
-while(1){
-	for (int i=0; i<5; i++) {
-		printf("### %d: %d ###",enemyArray[i]->locationIndex);
-	}
-}
+	putchar(enemyArray[0]->locationIndex + '0');
+	putchar(enemyArray[1]->locationIndex + '0');
+	putchar(enemyArray[2]->locationIndex + '0');
+	putchar(enemyArray[3]->locationIndex + '0');
+	putchar(enemyArray[4]->locationIndex + '0');
 */
+
+
+
+	for (int i=0; i<10; i++) {
 //		putchar(enemyArray[i]->locationIndex + '0');
+//		printf("### life of enemy is: %d ###", enemyArray[i]->life);
+	}
+//}
+
 //		putchar(usedEnemyPositions[i]+'0'); //given ascii value of character, it gets confused. 
 			//instead give it the integer and then typcast it using a following character
 //		printf("%d",usedEnemyPositions[i]);
+
+
+
+
+
+
+
+
+
+/*	bulletArray[0] = &b1;
+	usedBulletPositions[0]=1;
+*/
+		
+
+
+
 	
 
 
@@ -148,7 +168,7 @@ int game(void){
 
 	static int state = SETT;
 	
-	while(1) {
+//	while(1) {
 		switch(state) {
 		case SETT: //set or reset initial player/enemy values of the game
 			init_game();
@@ -172,7 +192,7 @@ int game(void){
 		//case PAUSE: //pauses game "time"
 		//case EXIT: //ends and exits game
 		}
-	}
+//	}
 
 }
 

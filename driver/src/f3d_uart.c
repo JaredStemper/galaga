@@ -83,13 +83,13 @@ void flush_uart(void) {
 
 //sends a character
 int putchar(int c) {
-  enqueue(&txbuf, c);
+//  enqueue(&txbuf, c);
 
-  if(!TxPrimed) { TxPrimed=1; flush_uart(); }
+//  if(!TxPrimed) { TxPrimed=1; flush_uart(); }
 
     
-//  while (USART_GetFlagStatus(USART1,USART_FLAG_TXE) == (uint16_t)RESET);
-//  USART_SendData(USART1, c);
+  while (USART_GetFlagStatus(USART1,USART_FLAG_TXE) == (uint16_t)RESET);
+  USART_SendData(USART1, c);
 
   return 0;
 
@@ -97,10 +97,10 @@ int putchar(int c) {
 
 //gets a character
 int getchar(void) {
- return dequeue(&rxbuf);
+// return dequeue(&rxbuf);
 
-//  while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == (uint16_t)RESET);
-//  return USART_ReceiveData(USART1);
+  while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == (uint16_t)RESET);
+  return USART_ReceiveData(USART1);
   
 }
 //sends a string
