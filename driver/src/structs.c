@@ -187,7 +187,7 @@ putchar(' ');
 
 } 
 
-struct enemy * newEnemyPointer(void){
+struct enemy *newEnemyPointer(void){
       struct enemy e;
 	return &e;
 }
