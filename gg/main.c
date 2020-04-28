@@ -48,9 +48,11 @@ void start(void){
 
 
 
-	
-	//if user hits space bar, then break
-//	while(1) {}
+	//press any key, then break
+//	while(1) {
+//		if(getchar()) { break; }
+//	}
+
 
 
 }
@@ -112,7 +114,7 @@ void init_game(void){
 		
 	drawBackground(pPtr);
 
-	drawEnemies(enemyArray, usedEnemyPositions); //draw enemies that are marked as alive
+	drawEnemies(enemyArray, usedEnemyPositions); //draw enemies that are marked as alive TODO test that "dead" enemy is not drawn
 
 	drawBullet(bPtr); //TODO: create shoot function
 
