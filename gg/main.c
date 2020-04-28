@@ -44,6 +44,17 @@ void start(void){
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 	for (int i = 0; i < MAX_BULLET; i++) { usedBulletPositions[i] = 0; }
 
+eptr1 = &e1;
+eptr2 = &e2;
+eptr3 = &e3;
+eptr4 = &e4;
+eptr5 = &e5;
+eptr6 = &e6;
+eptr7 = &e7;
+eptr8 = &e8;
+eptr9 = &e9;
+eptr10 = &e10;
+
 	//draw GALAGA text and instructions how to play
 	drawStartScreen(); 
 
@@ -70,8 +81,6 @@ void init_game(void){
 	p1.y2 = PLAYER_Y2;
 	p1.score = 66;
 	p1.level = 0;
-
-//	drawBackground(pPtr);
 
 
 	//create bullet
@@ -103,22 +112,25 @@ void init_game(void){
 	e2.color = 0x001F;
 	e2.life = 1;
 
-	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
+//	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
 
 
 	//create initial array of enemies
-/*
+
 	enemyArray[0] = &e1;
 	enemyArray[1] = &e2;
 
 	usedEnemyPositions[0]=1;
 	usedEnemyPositions[1]=1;
-*/
+
 
 //while loop used to test value of characters using screen
 //while(1){
-
 /*
+putchar(' ');
+putchar(' ');
+putchar(' ');
+putchar(' ');
 	putchar(enemyArray[0]->locationIndex + '0');
 	putchar(enemyArray[1]->locationIndex + '0');
 	putchar(enemyArray[2]->locationIndex + '0');

@@ -29,7 +29,35 @@ struct enemy {
 	int y1,y2; //y1 is top, y2 is bottom
 };
 
+struct enemy e1;
+struct enemy *eptr1;
 
+struct enemy e2;
+struct enemy *eptr2;
+
+struct enemy e3;
+struct enemy *eptr3;
+
+struct enemy e4;
+struct enemy *eptr4;
+
+struct enemy e5;
+struct enemy *eptr5;
+
+struct enemy e6;
+struct enemy *eptr6;
+
+struct enemy e7;
+struct enemy *eptr7;
+
+struct enemy e8;
+struct enemy *eptr8;
+
+struct enemy e9;
+struct enemy *eptr9;
+
+struct enemy e10;
+struct enemy *eptr10;
 
 
 struct enemy *enemyArray[MAX_ENEMY];
@@ -102,3 +130,5 @@ void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray
 void initArr(void);
 
 int enemyPositions[30][2];
+
+struct enemy * newEnemyPointer(void);

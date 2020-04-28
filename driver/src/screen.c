@@ -114,7 +114,7 @@ void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int live
   bulletPointer->color = 0xFFFF;
   bulletPointer->shooter = 1;
 
-  for(int j=0; j<BULLET_MAX, j++){
+  for(int j=0; j<MAX_BULLET; j++){
     if(!liveBullets[j]){
       liveBullets[j] = 1;
       bulletArray[j] = &bulletPointer;
@@ -128,11 +128,11 @@ void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int live
  * TODO: add attribute alive to struct bullet
  */
 void shoot(struct bullet *bulletPointer){
-  while(bulletPointer->y1 < 0 || bulletPointer->alive = 0){
-    bulletPointer->y1 = bulletPointer->y1 - 3;
-    bulletPointer->y2 = bulletPointer->y2 - 3;
+//  while(bulletPointer->y1 < 0 || bulletPointer->alive = 0){
+  //  bulletPointer->y1 = bulletPointer->y1 - 3;
+  //  bulletPointer->y2 = bulletPointer->y2 - 3;
     //delay(1000); //should we do this? // need to have the bullet go up little by little
-  }  
+//  }  
 }
 
 //void movePlayer(){
