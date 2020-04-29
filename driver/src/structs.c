@@ -136,37 +136,15 @@ void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
       //create enemy and ptr to it
 	eArray[j] = defaultEnemy;
 
-//	putchar('z');
       //set location for new enemy using reference to struct object 
       eArray[j].locationIndex = j;
 	
-//	putchar('z');
-
-	putchar(eArray[j].locationIndex + '0');
-	putchar('z');
-	if(j > 0) {
-		putchar(eArray[j-1].locationIndex + '0');
-	}
-
-
-//	putchar(eArray[j].locationIndex + '0');
-putchar(' ');
-putchar(' ');
-
-
-
-
   
       eArray[j].x1 = enemyPositions[j][0];
       eArray[j].x2 = eArray[j].x1 + ENEMY_WIDTH;
       eArray[j].y1 = enemyPositions[j][1];
       eArray[j].y2 = eArray[j].y1 + ENEMY_HEIGHT;
-/*
-      eArray[j].x1 = 50;
-      eArray[j].x2 = 70;
-      eArray[j].y1 = 50;
-      eArray[j].y2 = 70;
-*/
+
       eArray[j].life = 1;
       eArray[j].color = 0x001F;
 
@@ -181,31 +159,5 @@ putchar(' ');
 		
   }
 
-	putchar('z');
-/*
-	putchar(eArray[0].locationIndex + '0');
-	putchar(eArray[1].locationIndex + '0');
-	putchar(eArray[2].locationIndex + '0');
-	putchar(eArray[3].locationIndex + '0');
-	putchar(eArray[4].locationIndex + '0');
-
-	putchar('z');
-	putchar(enemyArray[0].locationIndex + '0');
-	putchar(enemyArray[1].locationIndex + '0');
-	putchar(enemyArray[2].locationIndex + '0');
-	putchar(enemyArray[3].locationIndex + '0');
-	putchar(enemyArray[4].locationIndex + '0');
-
-
-	for (int i = 0; i< 5; i++) {
-		for (j=0; j<
-
-
-	}
-*/
 } 
 
-struct enemy newEnemyPointer(void){
-      struct enemy e;
-	return e;
-}

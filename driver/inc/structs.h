@@ -133,4 +133,3 @@ void initArr(void);
 
 int enemyPositions[30][2];
 
-struct enemy newEnemyPointer(void);

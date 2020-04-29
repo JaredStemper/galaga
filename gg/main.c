@@ -44,21 +44,8 @@ void start(void){
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 	for (int i = 0; i < MAX_BULLET; i++) { usedBulletPositions[i] = 0; }
 
-	eptr1 = &e1;
-	eptr2 = &e2;
-	eptr3 = &e3;
-	eptr4 = &e4;
-	eptr5 = &e5;
-	eptr6 = &e6;
-	eptr7 = &e7;
-	eptr8 = &e8;
-	eptr9 = &e9;
-	eptr10 = &e10;
-
 	//draw GALAGA text and instructions how to play
 	drawStartScreen(); 
-
-
 
 	//press any key, then break
 //	while(1) {
@@ -82,37 +69,7 @@ void init_game(void){
 	p1.score = 66;
 	p1.level = 0;
 
-
-	//create bullet
-	//struct bullet b1;
-	//struct bullet *bPtr = &b1;
-	//b1.x1 = 63;
-	//b1.x2 = b1.x1+2;
-	//b1.y1 = 100;
-	//b1.y2 = b1.y1+4;
-
-
-	//create new initial enemy
-	struct enemy e1;
-	struct enemy *ePtr = &e1;
-	e1.x1 = 63;
-	e1.x2 = e1.x1+4;
-	e1.y1 = PLAYER_Y1;
-	e1.y2 = PLAYER_Y2;
-	e1.color = 0x001F;
-	e1.life = 1;
-
-
-	struct enemy e2;
-	struct enemy *e2Ptr = &e2;
-	e2.x1 = 43;
-	e2.x2 = e2.x1+4;
-	e2.y1 = PLAYER_Y1-20;
-	e2.y2 = PLAYER_Y2-20;
-	e2.color = 0x001F;
-	e2.life = 1;
-
-	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
+	makeEnemies(29, enemyArray, usedEnemyPositions); //create initial first 5 enemies
 
 
 	//create initial array of enemies
