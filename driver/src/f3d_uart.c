@@ -103,6 +103,16 @@ int getchar(void) {
   return USART_ReceiveData(USART1);
   
 }
+
+
+int getchar2(void) {
+// return dequeue(&rxbuf);
+
+  char temp = USART_ReceiveData(USART1);  
+  flush_uart();
+  return temp;
+  
+}
 //sends a string
 void putstring(char *s) {
   while(*s != '\0') { putchar(*s++); }	

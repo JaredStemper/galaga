@@ -40,6 +40,7 @@ void f3d_uart_init(void);
 int putchar(int);
 void flush_uart(void);
 int getchar(void);
+int getchar2(void);
 void putstring(char *);
 
 /* f3d_uart.h ends here */

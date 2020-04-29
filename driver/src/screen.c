@@ -147,7 +147,7 @@ void movePlayer(struct player *p, int input){
     break;
   case 'd':
   case 'D' :
-    if(p->y2 > 157){
+    if(p->y2 < 157){
       p->x1 = p->x1 + 10;
       p->x2 = p->x2 + 10;
     }

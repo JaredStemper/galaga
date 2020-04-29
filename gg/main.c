@@ -109,7 +109,7 @@ int game(void){
 		  //shoot(bulletArray, usedBulletPositions);
 
 			//check for input
-			if (c = getchar()) { //have to hold key to move
+			if (c = getchar2()) { //have to hold key to move
 				movePlayer(pPtr,c);
 			}
 
