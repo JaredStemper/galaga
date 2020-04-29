@@ -9,9 +9,9 @@ void drawBackground(struct player *p);
 
 void drawPlayer(struct player *p);
 
-void drawEnemy(struct enemy *e);
+void drawEnemy(struct enemy e);
 
-void drawEnemies(struct enemy *e[], int liveEnemy[]);
+void drawEnemies(struct enemy e[], int liveEnemy[]);
 
 void drawBullet(struct bullet *b);
 
@@ -21,4 +21,4 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
 
 void shoot(struct bullet bulletArray[], int liveBullets[]);
   
-void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet b[], int liveBullet[]);
+void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]);

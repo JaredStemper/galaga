@@ -61,8 +61,8 @@ void drawPlayer(struct player *p){
 }
 
 
-void drawEnemy(struct enemy *e){
-   drawRect(e->x1, e->y1, e->x2, e->y2, BLUE);
+void drawEnemy(struct enemy e){
+   drawRect(e.x1, e.y1, e.x2, e.y2, BLUE);
 }
 
 /*
@@ -73,7 +73,7 @@ liveenemy = {0,1,1,1,0,0,0,0}
 enemyPosition= {{1,2}{2,3}{1,3}{2,1}{1,1}}
 */ 
 //uses current list of enemy locations to determine the index of live enemies
-void drawEnemies(struct enemy *e[], int liveEnemy[]){
+void drawEnemies(struct enemy e[], int liveEnemy[]){
   for (int i=0; i<30; i++) {
 	if (liveEnemy[i]) {
 		drawEnemy(e[i]);
@@ -148,7 +148,7 @@ void movePlayer(struct player *playerPtr, int input){
 
 //after collision, bullet array marks bullet index as 0
 
-void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
+void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 	drawBackground(playerPtr);
 	drawPlayer(playerPtr);
 	drawEnemies(e,liveEnemy);

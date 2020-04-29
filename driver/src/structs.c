@@ -154,17 +154,19 @@ putchar(' ');
 putchar(' ');
 
 
-/*  
-      eArray[j].x1 = enemyPositions[0][0];
+
+
+  
+      eArray[j].x1 = enemyPositions[j][0];
       eArray[j].x2 = eArray[j].x1 + ENEMY_WIDTH;
-      eArray[j].y1 = enemyPositions[i][1];
+      eArray[j].y1 = enemyPositions[j][1];
       eArray[j].y2 = eArray[j].y1 + ENEMY_HEIGHT;
-*/
+/*
       eArray[j].x1 = 50;
       eArray[j].x2 = 70;
       eArray[j].y1 = 50;
       eArray[j].y2 = 70;
-
+*/
       eArray[j].life = 1;
       eArray[j].color = 0x001F;
 
@@ -180,6 +182,7 @@ putchar(' ');
   }
 
 	putchar('z');
+/*
 	putchar(eArray[0].locationIndex + '0');
 	putchar(eArray[1].locationIndex + '0');
 	putchar(eArray[2].locationIndex + '0');
@@ -193,6 +196,13 @@ putchar(' ');
 	putchar(enemyArray[3].locationIndex + '0');
 	putchar(enemyArray[4].locationIndex + '0');
 
+
+	for (int i = 0; i< 5; i++) {
+		for (j=0; j<
+
+
+	}
+*/
 } 
 
 struct enemy newEnemyPointer(void){
