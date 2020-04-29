@@ -136,14 +136,19 @@ void shoot(struct bullet bArray[], int liveBullets[]){
   }  
 }
 
-void movePlayer(struct player *playerPtr, int input){
-  
-  //jared work on this->
-  /*if(input == (??)){
-    playerPtr->x1 = playerPtr->x1 + 3;
-    playerPtr->x2 = playerPtr->x2 + 3;
+void movePlayer(struct player *p, int input){
+  switch(input){
+  case 'a':
+  case 'A':
+    p->x1 = p->x1 - 10;
+    p->x2 = p->x2 - 10;
+    break;
+  case 'd':
+  case 'D' :
+    p->x1 = p->x1 + 10;
+    p->x2 = p->x2 + 10;
+    break;
   }
-  */
 }
 
 //after collision, bullet array marks bullet index as 0
