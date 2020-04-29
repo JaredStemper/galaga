@@ -44,16 +44,16 @@ void start(void){
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 	for (int i = 0; i < MAX_BULLET; i++) { usedBulletPositions[i] = 0; }
 
-eptr1 = &e1;
-eptr2 = &e2;
-eptr3 = &e3;
-eptr4 = &e4;
-eptr5 = &e5;
-eptr6 = &e6;
-eptr7 = &e7;
-eptr8 = &e8;
-eptr9 = &e9;
-eptr10 = &e10;
+	eptr1 = &e1;
+	eptr2 = &e2;
+	eptr3 = &e3;
+	eptr4 = &e4;
+	eptr5 = &e5;
+	eptr6 = &e6;
+	eptr7 = &e7;
+	eptr8 = &e8;
+	eptr9 = &e9;
+	eptr10 = &e10;
 
 	//draw GALAGA text and instructions how to play
 	drawStartScreen(); 
@@ -84,12 +84,12 @@ void init_game(void){
 
 
 	//create bullet
-	struct bullet b1;
-	struct bullet *bPtr = &b1;
-	b1.x1 = 63;
-	b1.x2 = b1.x1+2;
-	b1.y1 = 100;
-	b1.y2 = b1.y1+4;
+	//struct bullet b1;
+	//struct bullet *bPtr = &b1;
+	//b1.x1 = 63;
+	//b1.x2 = b1.x1+2;
+	//b1.y1 = 100;
+	//b1.y2 = b1.y1+4;
 
 
 	//create new initial enemy
@@ -119,9 +119,21 @@ void init_game(void){
 
 	enemyArray[0] = &e1;
 	enemyArray[1] = &e2;
+	enemyArray[2] = &e3;
+	enemyArray[3] = &e4;
+	enemyArray[4] = &e5;
+	enemyArray[5] = &e6;
+	enemyArray[6] = &e7;
+	enemyArray[7] = &e8;
+	enemyArray[8] = &e9;
+	enemyArray[9] = &e10;
+	
 
-	usedEnemyPositions[0]=1;
-	usedEnemyPositions[1]=1;
+	//usedEnemyPositions[0]=1;
+	//usedEnemyPositions[1]=1;
+	for(int i=0;i<10;i++){
+	  usedEnemyPositions[k]=0;
+	}
 
 
 //while loop used to test value of characters using screen
@@ -140,10 +152,10 @@ putchar(' ');
 
 
 
-	for (int i=0; i<10; i++) {
+//	for (int i=0; i<10; i++) {
 //		putchar(enemyArray[i]->locationIndex + '0');
 //		printf("### life of enemy is: %d ###", enemyArray[i]->life);
-	}
+//	}
 //}
 
 //		putchar(usedEnemyPositions[i]+'0'); //given ascii value of character, it gets confused. 
@@ -191,9 +203,12 @@ int game(void){
 			//TODO: checkCollision();
 
 			//check for input
+		        // if(up arrow || W || w){makeBullet();}
+		       
 
 			//move objects
-
+		        //
+		        //shoot(); //this will update positions of bullets that have already been made
 
 			//update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);

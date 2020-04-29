@@ -89,10 +89,10 @@ void drawBullet(struct bullet *b){
 
 
 
-void drawBullets(struct bullet *b[], int liveBullet[]){
+void drawBullets(struct bullet b[], int liveBullet[]){
   for(int i=0; i<MAX_BULLET; i++){
     if(liveBullet[i]){
-      drawBullet(b[i]);
+      drawBullet(&b[i]);
     }
   }
 }
@@ -102,22 +102,22 @@ void drawBullets(struct bullet *b[], int liveBullet[]){
  * TODO: add same functionality for enemy
  * TODO: add to .h file
 */
-void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int liveBullets[]){
+void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]){
   int x = (playerPtr->x1 / playerPtr->x2)/2;
   int y = playerPtr->y1;
 
-  struct bullet *bulletPointer;
-  bulletPointer->x1 = x;
-  bulletPointer->x2 = x+BULLET_WIDTH;
-  bulletPointer->y1 = y;
-  bulletPointer->y2 = y+BULLET_HEIGHT;
-  bulletPointer->color = 0xFFFF;
-  bulletPointer->shooter = 1;
+  struct bullet b1;
+  b1.x1 = x;
+  b1.x2 = x+BULLET_WIDTH;
+  b1.y1 = y;
+  b1.y2 = y+BULLET_HEIGHT;
+  b1.color = 0xFFFF;
+  b1.shooter = 1;
 
   for(int j=0; j<MAX_BULLET; j++){
     if(!liveBullets[j]){
       liveBullets[j] = 1;
-      bulletArray[j] = &bulletPointer;
+      bArray[j] = b1;
       break;
     } else{j++;}
   }  
@@ -127,16 +127,24 @@ void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int live
  * TODO: add to .h file
  * TODO: add attribute alive to struct bullet
  */
-void shoot(struct bullet *bulletPointer){
-//  while(bulletPointer->y1 < 0 || bulletPointer->alive = 0){
-  //  bulletPointer->y1 = bulletPointer->y1 - 3;
-  //  bulletPointer->y2 = bulletPointer->y2 - 3;
-    //delay(1000); //should we do this? // need to have the bullet go up little by little
-//  }  
+void shoot(struct bullet bArray[], int liveBullets[]){
+  for(int i=0; i < MAX_BULLET; i++){
+    if(liveBullets[i]){
+     bArray[i].y1=bArray[i].y1+3;
+     bArray[i].y2=bArray[i].y2+3;    
+    }
+  }  
 }
 
-//void movePlayer(){
-//}
+void movePlayer(struct player *playerPtr, int input){
+  
+  //jared work on this->
+  /*if(input == (??)){
+    playerPtr->x1 = playerPtr->x1 + 3;
+    playerPtr->x2 = playerPtr->x2 + 3;
+  }
+  */
+}
 
 //after collision, bullet array marks bullet index as 0
 

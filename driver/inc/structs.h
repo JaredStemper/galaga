@@ -62,6 +62,8 @@ struct enemy *eptr10;
 
 struct enemy *enemyArray[MAX_ENEMY];
 
+//struct enemy enemyStructArray[MAX_ENEMY];
+
 int usedEnemyPositions[MAX_ENEMY];
 
 
@@ -90,7 +92,7 @@ struct bullet {
 	int shooter; //1 if player, 2 if enemy
 };
 
-struct bullet *bulletArray[MAX_BULLET];
+struct bullet bulletArray[MAX_BULLET]; //changes from *bulletArray[MAX_BULLET]; -kp
 
 int usedBulletPositions[MAX_BULLET];
 
