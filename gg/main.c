@@ -129,11 +129,11 @@ void init_game(void){
 	enemyArray[9] = &e10;
 	
 
-	//usedEnemyPositions[0]=1;
-	//usedEnemyPositions[1]=1;
-	for(int i=0;i<10;i++){
-	  usedEnemyPositions[k]=0;
-	}
+	usedEnemyPositions[0]=1;
+	usedEnemyPositions[1]=1;
+	//for(int i=0;i<10;i++){
+	//usedEnemyPositions[k]=1;
+	//}
 
 
 //while loop used to test value of characters using screen
@@ -192,7 +192,7 @@ int game(void){
 
 	static int state = SETT;
 	
-//	while(1) {
+	while(1) {
 		switch(state) {
 		case SETT: //set or reset initial player/enemy values of the game
 			init_game();
@@ -209,7 +209,8 @@ int game(void){
 			//move objects
 		        //
 		        //shoot(); //this will update positions of bullets that have already been made
-
+		  makeBullet(pPtr, bulletArray, usedBulletPositions);
+		  shoot(bulletArray, usedBulletPositions);
 			//update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 
@@ -219,7 +220,7 @@ int game(void){
 		//case PAUSE: //pauses game "time"
 		//case EXIT: //ends and exits game
 		}
-//	}
+	}
 
 }
 

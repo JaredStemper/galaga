@@ -15,10 +15,10 @@ void drawEnemies(struct enemy *e[], int liveEnemy[]);
 
 void drawBullet(struct bullet *b);
 
-void drawBullets(struct bullet *b[], int liveBullet[]);
+void drawBullets(struct bullet b[], int liveBullet[]);
 
-void makeBullet(struct player *playerPtr, struct bullet *bulletArray[], int liveBullets[]);
+void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]);
 
-void shoot(struct bullet *bulletPointer);
+void shoot(struct bullet bulletArray[], int liveBullets[]);
   
-void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet *b[], int liveBullet[]);
+void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet b[], int liveBullet[]);

@@ -148,7 +148,7 @@ void movePlayer(struct player *playerPtr, int input){
 
 //after collision, bullet array marks bullet index as 0
 
-void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet *b[], int liveBullet[]) {
+void drawAll(struct player *playerPtr, struct enemy *e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 	drawBackground(playerPtr);
 	drawPlayer(playerPtr);
 	drawEnemies(e,liveEnemy);
