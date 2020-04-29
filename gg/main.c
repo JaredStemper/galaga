@@ -72,76 +72,8 @@ void init_game(void){
 	makeEnemies(29, enemyArray, usedEnemyPositions); //create initial first 5 enemies
 
 
-	//create initial array of enemies
-/*
-	enemyArray[0] = &e1;
-	enemyArray[1] = &e2;
-	enemyArray[2] = &e3;
-	enemyArray[3] = &e4;
-	enemyArray[4] = &e5;
-	enemyArray[5] = &e6;
-	enemyArray[6] = &e7;
-	enemyArray[7] = &e8;
-	enemyArray[8] = &e9;
-	enemyArray[9] = &e10;
-*/	
-
-	usedEnemyPositions[0]=1;
-	usedEnemyPositions[1]=1;
-	//for(int i=0;i<10;i++){
-	//usedEnemyPositions[k]=1;
-	//}
-
-	//usedEnemyPositions[0]=1;
-	//usedEnemyPositions[1]=1;
-/*	for(int i=0;i<10;i++){
-	  usedEnemyPositions[k]=0;
-	}
-*/
-
-//while loop used to test value of characters using screen
-//while(1){
-/*
-putchar(' ');
-putchar(' ');
-putchar(' ');
-putchar(' ');
-	putchar(enemyArray[0]->locationIndex + '0');
-	putchar(enemyArray[1]->locationIndex + '0');
-	putchar(enemyArray[2]->locationIndex + '0');
-	putchar(enemyArray[3]->locationIndex + '0');
-	putchar(enemyArray[4]->locationIndex + '0');
-*/
-
-
-
-//	for (int i=0; i<10; i++) {
-//		putchar(enemyArray[i]->locationIndex + '0');
-//		printf("### life of enemy is: %d ###", enemyArray[i]->life);
-//	}
-//}
-
-//		putchar(usedEnemyPositions[i]+'0'); //given ascii value of character, it gets confused. 
-			//instead give it the integer and then typcast it using a following character
-//		printf("%d",usedEnemyPositions[i]);
-
-
-
-
-
-
-
-
-
-/*	bulletArray[0] = &b1;
-	usedBulletPositions[0]=1;
-*/
-		
-
-
-
-	
-
+//	putchar(enemyArray[i]->locationIndex + '0');
+//	printf("### life of enemy is: %d ###", enemyArray[i]->life);
 
 }
 void end(void){

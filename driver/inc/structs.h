@@ -3,7 +3,8 @@
 #define PLAYER_Y1 137
 #define PLAYER_Y2 147
 
-#define MAX_ENEMY 5 //make sure that there are 30 available positions when changing max_enemy back to 30
+#define MAX_ENEMY 30
+
 #define MAX_BULLET 50 
 
 #define CENTERX 63
