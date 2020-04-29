@@ -112,11 +112,11 @@ void init_game(void){
 	e2.color = 0x001F;
 	e2.life = 1;
 
-//	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
+	makeEnemies(5, enemyArray, usedEnemyPositions); //create initial first 5 enemies TODO: fix this
 
 
 	//create initial array of enemies
-
+/*
 	enemyArray[0] = &e1;
 	enemyArray[1] = &e2;
 	enemyArray[2] = &e3;
@@ -127,7 +127,7 @@ void init_game(void){
 	enemyArray[7] = &e8;
 	enemyArray[8] = &e9;
 	enemyArray[9] = &e10;
-	
+*/	
 
 	usedEnemyPositions[0]=1;
 	usedEnemyPositions[1]=1;
@@ -135,6 +135,12 @@ void init_game(void){
 	//usedEnemyPositions[k]=1;
 	//}
 
+	//usedEnemyPositions[0]=1;
+	//usedEnemyPositions[1]=1;
+/*	for(int i=0;i<10;i++){
+	  usedEnemyPositions[k]=0;
+	}
+*/
 
 //while loop used to test value of characters using screen
 //while(1){
@@ -209,8 +215,8 @@ int game(void){
 			//move objects
 		        //
 		        //shoot(); //this will update positions of bullets that have already been made
-		  makeBullet(pPtr, bulletArray, usedBulletPositions);
-		  shoot(bulletArray, usedBulletPositions);
+		  //makeBullet(pPtr, bulletArray, usedBulletPositions);
+		  //shoot(bulletArray, usedBulletPositions);
 			//update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 

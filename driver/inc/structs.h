@@ -60,7 +60,7 @@ struct enemy e10;
 struct enemy *eptr10;
 
 
-struct enemy *enemyArray[MAX_ENEMY];
+struct enemy enemyArray[MAX_ENEMY];
 
 //struct enemy enemyStructArray[MAX_ENEMY];
 
@@ -127,10 +127,10 @@ int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int 
 
 int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2);
 
-void makeEnemies(int numOfEnemies, struct enemy *enemyArray[], int locationArray[]);
+void makeEnemies(int numOfEnemies, struct enemy enemyArray[], int locationArray[]);
 
 void initArr(void);
 
 int enemyPositions[30][2];
 
-struct enemy * newEnemyPointer(void);
+struct enemy newEnemyPointer(void);

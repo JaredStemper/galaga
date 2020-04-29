@@ -120,8 +120,10 @@ int enemyPositions[30][2] = {
     {CENTERX+10,CENTERY+30}
   };
 
-void makeEnemies(int numOfEnemies, struct enemy *eArray[], int locationArray[]) {
+void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
   int i = 0; //keeps track of enemies that have been successfully made		
+
+	struct enemy defaultEnemy;
 
   //find location in arrayLiveEnemies that is empty/dead, and place enemy
   for (int j = 0; j < MAX_ENEMY; j++) { 
@@ -132,34 +134,39 @@ void makeEnemies(int numOfEnemies, struct enemy *eArray[], int locationArray[]) 
       locationArray[j] = 1;
 
       //create enemy and ptr to it
-	eArray[j] = newEnemyPointer();
+	eArray[j] = defaultEnemy;
 
-putchar('z');
+//	putchar('z');
       //set location for new enemy using reference to struct object 
-      eArray[j]->locationIndex = j;
+      eArray[j].locationIndex = j;
+	
+//	putchar('z');
 
-	putchar('z');
-
-	putchar(eArray[j]->locationIndex + '0');
+	putchar(eArray[j].locationIndex + '0');
 	putchar('z');
 	if(j > 0) {
-		putchar(eArray[j-1]->locationIndex + '0');
+		putchar(eArray[j-1].locationIndex + '0');
 	}
 
 
-//	putchar(eArray[j]->locationIndex + '0');
+//	putchar(eArray[j].locationIndex + '0');
 putchar(' ');
 putchar(' ');
 
 
 /*  
-      eArray[j]->x1 = enemyPositions[0][0];
-      eArray[j]->x2 = eArray[j]->x1 + ENEMY_WIDTH;
-      eArray[j]->y1 = enemyPositions[i][1];
-      eArray[j]->y2 = eArray[j]->y1 + ENEMY_HEIGHT;
+      eArray[j].x1 = enemyPositions[0][0];
+      eArray[j].x2 = eArray[j].x1 + ENEMY_WIDTH;
+      eArray[j].y1 = enemyPositions[i][1];
+      eArray[j].y2 = eArray[j].y1 + ENEMY_HEIGHT;
 */
-      eArray[j]->life = 1;
-      eArray[j]->color = 0x001F;
+      eArray[j].x1 = 50;
+      eArray[j].x2 = 70;
+      eArray[j].y1 = 50;
+      eArray[j].y2 = 70;
+
+      eArray[j].life = 1;
+      eArray[j].color = 0x001F;
 
     }
     else if(j == MAX_ENEMY-1) {
@@ -171,23 +178,24 @@ putchar(' ');
 
 		
   }
-	putchar('z');
-	putchar(eArray[0]->locationIndex + '0');
-	putchar(eArray[1]->locationIndex + '0');
-	putchar(eArray[2]->locationIndex + '0');
-	putchar(eArray[3]->locationIndex + '0');
-	putchar(eArray[4]->locationIndex + '0');
 
 	putchar('z');
-	putchar(enemyArray[0]->locationIndex + '0');
-	putchar(enemyArray[1]->locationIndex + '0');
-	putchar(enemyArray[2]->locationIndex + '0');
-	putchar(enemyArray[3]->locationIndex + '0');
-	putchar(enemyArray[4]->locationIndex + '0');
+	putchar(eArray[0].locationIndex + '0');
+	putchar(eArray[1].locationIndex + '0');
+	putchar(eArray[2].locationIndex + '0');
+	putchar(eArray[3].locationIndex + '0');
+	putchar(eArray[4].locationIndex + '0');
+
+	putchar('z');
+	putchar(enemyArray[0].locationIndex + '0');
+	putchar(enemyArray[1].locationIndex + '0');
+	putchar(enemyArray[2].locationIndex + '0');
+	putchar(enemyArray[3].locationIndex + '0');
+	putchar(enemyArray[4].locationIndex + '0');
 
 } 
 
-struct enemy *newEnemyPointer(void){
+struct enemy newEnemyPointer(void){
       struct enemy e;
-	return &e;
+	return e;
 }
