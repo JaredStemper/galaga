@@ -81,6 +81,8 @@ void end(void){
 
 }
 int game(void){
+	int c; /* current character */
+
 	//game() sets screen to "start game display" that shows game title, basic instructions, and waits for user to enter a space to begin
 	//also initializes all hardware components
 	start();
@@ -97,7 +99,6 @@ int game(void){
 			//check for collisions
 			//TODO: checkCollision();
 
-			//check for input
 		        // if(up arrow || W || w){makeBullet();}
 		       
 
@@ -106,6 +107,12 @@ int game(void){
 		        //shoot(); //this will update positions of bullets that have already been made
 		  //makeBullet(pPtr, bulletArray, usedBulletPositions);
 		  //shoot(bulletArray, usedBulletPositions);
+
+			//check for input
+			if (c = getchar()) { //have to hold key to move
+				movePlayer(pPtr,c);
+			}
+
 			//update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 

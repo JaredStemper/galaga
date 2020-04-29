@@ -110,7 +110,7 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
   b1.x1 = x;
   b1.x2 = x+BULLET_WIDTH;
   b1.y1 = y+BULLET_HEIGHT;
-  b1.y2 = bullet.y1+BULLET_HEIGHT;
+  b1.y2 = b1.y1+BULLET_HEIGHT;
   b1.color = 0xFFFF;
   b1.shooter = 1;
 
