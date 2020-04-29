@@ -140,13 +140,17 @@ void movePlayer(struct player *p, int input){
   switch(input){
   case 'a':
   case 'A':
-    p->x1 = p->x1 - 10;
-    p->x2 = p->x2 - 10;
+    if(p->y1 > 2){
+      p->x1 = p->x1 - 10;
+      p->x2 = p->x2 - 10;
+    }
     break;
   case 'd':
   case 'D' :
-    p->x1 = p->x1 + 10;
-    p->x2 = p->x2 + 10;
+    if(p->y2 > 157){
+      p->x1 = p->x1 + 10;
+      p->x2 = p->x2 + 10;
+    }
     break;
   }
 }
