@@ -19,6 +19,6 @@ void drawBullets(struct bullet b[], int liveBullet[]);
 
 void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]);
 
-void shoot(struct bullet bulletArray[], int liveBullets[]);
+void shoot(struct bullet bArray[], int liveBullets[]);
   
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]);
