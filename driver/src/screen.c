@@ -241,7 +241,7 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	shoot(b,liveBullet);//probably should rename to moveBullets
 
 	//check for collisions
-	putchar(checkCollision(playerPtr, liveBullet, b, liveEnemy, e) + '0');
+	checkCollision(playerPtr, liveBullet, b, liveEnemy, e);
 
 	drawBullets(b,liveBullet);
 	drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9

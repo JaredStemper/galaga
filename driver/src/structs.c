@@ -49,16 +49,16 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
       if(b.shooter == 1){
 //	putchar('1');
 	//check every live enemy
-	for (int j=0; i<MAX_ENEMY; j++) {
+	for (int j=0; j<MAX_ENEMY; j++) {
 	  struct enemy e = eArr[j];
 	  //if enemy is alive
 	  if (elifeArr[j]) {
 	    //if collision, set life to 0 and return 1 (for true)
-	putchar(' ');
-	    if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1, e.y2)) { 
+	    if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1, e.y2)) { //TODO: always returns true
 	      elifeArr[j] = 0;
 	      blifeArr[i] = 0;
 	      e.life = 0; //deprecated?
+		putchar('z');
 	      return 1; //true, there was a collision
 	    }
 	  }
