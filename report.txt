@@ -1,3 +1,78 @@
 Report File for C335 Final Project Spring 2020 - Galaga
 
 Authors: Kunal Pendse(kpendse), Jared Stemper(jaastemp)
+
+
+Final Project Report (final_project.txt) :
+
+Description:
+
+         You control a spaceship at the bottom of the game screen. Use the 'a' and 'd' keys to move the ship, and press 'w' to shoot. Your enemies are aliens who fly down and attack you with bombs. Shoot all of the aliens to get the next level and get the HIGHEST score.
+
+
+Use of peripherals:
+        • LCD
+                displays user's spaceship and enemies
+        • User Input (1 or more devices)
+                keyboard: movement of player spaceship and shooting.
+			‘a’, ‘d’ to move, and 'w' to shoot
+        • Board Magnetometer
+                by rotating to a different cardinal direction, the spaceship will shoot different angles. 
+		initial degree - shoot straight up
+		Anything left of initial degree   -  bullet comes out to left diagonal 
+		Anything right of initial degree -  bullets come out to right diagonal
+
+Tasks performed:
+	basic graphics for game (kunal)
+		enemy, player, bullet shapes
+			*advanced ship and enemy graphics were also done by kunal, and they look very nice*
+	Movement
+		player
+			input (jared)
+		bullet (kunal)
+			player bullet vs enemy bullet
+		enemy (jared)
+	Counter of enemies left (kunal)
+		kept track of so that player can be marked as a winner
+	"intelligent" enemy attacks (kunal/jared)
+		Larger range of “straight” shots for enemies (kunal)
+		enemies move horizontal/downward (jared)
+	drawing functions
+		only update the rectangle of the object that moved (kunal/jared)
+		Update score, level, and lives using this method (jared/kunal) (i.e. black out current location, then draw to new spot)
+			created counters and kept track of updated stats (kunal)
+			added to screen the prinout of stats (jared)
+	Player
+		player moves by input (jared)
+		Player gets hit with enemy bullet, loses life (kunal/jared)
+		Shoot works (kunal)
+			positions are different if enemy creates a bullet vs player
+	Enemies
+		enemy dies - score updates (kunal)
+		create multiple enemies (jared)
+		enemies shoot (kunal)
+		movement (jared)
+	Bullet
+		Changes bullet.angle based on magnetometer reading (jared)
+		player input to shoot player bullet (jared/kunal)
+	During game
+		Updates constantly, checks for collisions/input (kunal/jared)
+		shift enemies randomly (kunal/jared)
+		multiple levels (jared/kunal)
+	Game end (kunal/jared)
+		If lives are 0:
+			Show game over in big red letters
+		Else:
+			Say good job, show score, hit space to play again (runs init()) and goes to during game
+
+Technical Challenges:
+	Issues using a const to initialize an array but unable to shift values all together
+		solved by looped through initialized array and then shifting through
+	git merge issues due to time zone differences
+		solved by communication, fixing merge issues, communication, and proper separation of duties
+	Game logic overall:
+		This was a fairly complex game to attempt to recreate, and if we could start from scratch right now, I think that we would use many similar approaches, however, we would definitely make sure to start off with graphics and then move to game logic, for the sake of testing the Arm machines.
+	Debugging:
+		We ended up having to create a new debuggin printout statement to see the value of variables with large ints. This was tricky, but math saved the day. yay math.
+
+
