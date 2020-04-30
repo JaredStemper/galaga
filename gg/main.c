@@ -68,7 +68,7 @@ void init_game(void){
 	p1.y1 = PLAYER_Y1;
 	p1.y2 = PLAYER_Y2;
 	p1.score = 0;
-	p1.level = 0;
+	p1.level = 1;
 
 	float mag_d[3]; //mags
 
@@ -76,8 +76,8 @@ void init_game(void){
 
 	p1.starterHeading = get_heading(mag_d);
 
-	makeEnemies(10, enemyArray, usedEnemyPositions); //create initial first 5 enemies
-	enemyCounter = 10;
+	makeEnemies(20, enemyArray, usedEnemyPositions); //create initial first 5 enemies
+	enemyCounter = 20;
 
 
 //	putchar(enemyArray[i]->locationIndex + '0');
@@ -106,9 +106,9 @@ int game(void){
 		switch(state) {
 		case SETT: //set or reset initial player/enemy values of the game
 			init_game();
-			state = GAME;
+			state = LEVELONE;
 			break;
-		case GAME: //
+		case LEVELONE: //
 			//check for input
 			if (c = getchar2()) { //have to hold key to move
 				if(c == 'w') { makeBullet(pPtr,bulletArray,usedBulletPositions); }
@@ -120,11 +120,29 @@ int game(void){
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 
 			if (pPtr->life <= 0) { state = OVER; }
-			if (enemyCounter==0) {state = OVER; }
+			if (enemyCounter==0) { state = LEVELTWO; pPtr->level = 2; }
+	
+			break;
+		case LEVELTWO: //
+			//check for input
+			if (c = getchar2()) { //have to hold key to move
+				if(c == 'w') { makeBullet(pPtr,bulletArray,usedBulletPositions); }
+				erasePlayer(pPtr);
+				movePlayer(pPtr,c);
+			}
+
+			//move positions && check for collisions && update display
+			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
+
+			if (pPtr->life <= 0) { state = OVER; }
+			if (enemyCounter==0) { state = OVER; }
 	
 			break;
 		case OVER:
+			pPtr->level = 1;
+
 			drawEndScreen(pPtr);
+			drawPlayerStats(pPtr);
 			while(1) {
 			  if(getchar2()) {
 			    f3d_lcd_fillScreen2(BLACK);

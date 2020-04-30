@@ -1,5 +1,5 @@
 // Game States
-enum {SETT, GAME, OVER};
+enum {SETT, LEVELONE, LEVELTWO, OVER};
 
 void init_game(void);
 void start(void);

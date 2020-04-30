@@ -26,9 +26,9 @@ void drawEndScreen(struct player *playerPtr){
 		f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
 	}
 	else {
-		f3d_lcd_drawString(45,70,  "GOOOD JOB", GREEN,BLACK);
-		f3d_lcd_drawString(21,90,"press any key", WHITE, BLACK);
-		f3d_lcd_drawString(40,100, "to play again", WHITE, BLACK);	
+		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
+		f3d_lcd_drawString(23,90,"press any key", WHITE, BLACK);
+		f3d_lcd_drawString(25,100, "to play again", WHITE, BLACK);	
 
 	}
 } 
@@ -245,7 +245,26 @@ TODO:
 	move downward, in diagonals quick enough to scare the player
 */
 
-void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[], int yRate){
+void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[]){
+  //shift currentX/currentY randomly, but take care not to go out of bounds
+  for (int i=0; i<MAX_ENEMY; i++) {
+    if(liveE[i]){
+      int currentX = eArr[i].x1;
+      int currentY = eArr[i].y1;				
+
+      int shiftXby = randShiftXList[randomNumberGen(0,242)]; 	//uses first half of randList - should be -/+
+      int finalX = currentX + shiftXby;
+
+      //128x160 are official board dimensions. Check if LEFTMOST and RIGHTMOST values are within bounds x:0 and 128; y:0 and 160
+      //since the furthest enemy from center is +-30, if that final result is not in bounds, reverse shift (may result in slight teleportation by edges...)
+      if (finalX-30 < 0 || finalX+30 > 128) { finalX = currentX - shiftXby; } 
+      //set new locations
+      eArr[i].x1 = finalX;
+      eArr[i].x2 = finalX + ENEMY_WIDTH;
+    }
+  }
+}
+void moveEnemiesTwo(struct player *pPtr, struct enemy eArr[], int liveE[]){
   //shift currentX/currentY randomly, but take care not to go out of bounds
   for (int i=0; i<MAX_ENEMY; i++) {
     if(liveE[i]){
@@ -312,7 +331,14 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 
 	if (enemyShiftDelay == 0) { 
 		eraseEnemies(e,liveEnemy);
-		moveEnemies(playerPtr, e, liveEnemy, 1); //higher the last parameter, the slower enemies move down
+		//check player level
+		if (playerPtr->level == 1) {
+			moveEnemies(playerPtr, e, liveEnemy); //higher the last parameter, the slower enemies move down
+		}
+		else {
+			moveEnemiesTwo(playerPtr, e, liveEnemy); //higher the last parameter, the slower enemies move down
+		}
+
 		enemyShiftDelay = 5;
 	}
 
