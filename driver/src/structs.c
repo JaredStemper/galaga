@@ -161,3 +161,30 @@ void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
 
 } 
 
+/*
+ * makes ONE bullet at player position and adds it to bulletArray(which is globally defined)
+ * TODO: add same functionality for enemy
+ * TODO: add to .h file
+*/
+void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]){
+  int x = (playerPtr->x1 + playerPtr->x2)/2;
+  int y = playerPtr->y1;
+
+  struct bullet b1;
+  b1.x1 = x;
+  b1.x2 = x+BULLET_WIDTH;
+  b1.y1 = y;
+  b1.y2 = b1.y1+BULLET_HEIGHT;
+  b1.color = 0xFFFF;
+  b1.shooter = 1; //needs to check if enemy or blayer before shooting/setting location
+
+  for(int j=0; j<MAX_BULLET; j++){
+    if(!liveBullets[j]){
+      liveBullets[j] = 1;
+      bArray[j] = b1;
+      break;
+    } else{j++;}
+  }
+
+}
+

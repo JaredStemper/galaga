@@ -25,7 +25,7 @@ Game end
 	show score, hit space to play again (runs init()) and goes to during game
 */
 #include <stm32f30x.h>
-#include <f3d_accel.h>
+#include <f3d_accel.h> 
 #include <f3d_mag.h>
 #include <f3d_i2c.h>
 #include <f3d_delay.h>
@@ -48,9 +48,9 @@ void start(void){
 	drawStartScreen(); 
 
 	//press any key, then break
-//	while(1) {
-//		if(getchar()) { break; }
-//	}
+	while(1) {
+		if(getchar2()) { break; }
+	}
 
 
 
@@ -88,7 +88,12 @@ int game(void){
 	start();
 
 	static int state = SETT;
-	
+
+	//clear previous text, but leave galage for a background	
+	f3d_lcd_drawString(25,90,"press any key", BLACK, BLACK);
+	f3d_lcd_drawString(40,100, "to play", BLACK, BLACK);
+
+
 	while(1) {
 		switch(state) {
 		case SETT: //set or reset initial player/enemy values of the game
@@ -110,6 +115,8 @@ int game(void){
 
 			//check for input
 			if (c = getchar2()) { //have to hold key to move
+				if(c == 'w') { makeBullet(pPtr,bulletArray,usedBulletPositions); }
+				erasePlayer(pPtr);
 				movePlayer(pPtr,c);
 			}
 

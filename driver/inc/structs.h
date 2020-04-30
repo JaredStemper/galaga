@@ -14,7 +14,7 @@
 #define ENEMY_HEIGHT 4
 
 #define BULLET_WIDTH 2
-#define BULLET_HEIGHT 6
+#define BULLET_HEIGHT 2
 
 //enemies
 struct enemy { 
@@ -134,3 +134,4 @@ void initArr(void);
 
 int enemyPositions[30][2];
 
+void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]);

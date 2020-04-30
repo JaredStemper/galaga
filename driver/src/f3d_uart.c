@@ -8,6 +8,7 @@
 #include <stm32f30x.h>
 #include <f3d_uart.h>
 #include <queue.h>
+#include <f3d_delay.h>
 
 queue_t rxbuf;
 queue_t txbuf;
@@ -106,16 +107,63 @@ int getchar(void) {
 
 
 int getchar2(void) {
-// return dequeue(&rxbuf);
-
-  char temp = USART_ReceiveData(USART1);  
-  flush_uart();
-  return temp;
-  
+ return dequeue(&rxbuf);
+	
+/*	if (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == (uint16_t)RESET) {
+	  putchar('z');
+	  uint16_t temp = USART_ReceiveData(USART1);  
+	  
+	  return temp;
+	}  
+*/
 }
 //sends a string
 void putstring(char *s) {
   while(*s != '\0') { putchar(*s++); }	
+}
+
+void putIntString(int a) {
+            int atemp = a;
+            int btemp = a;
+            int dcount = 0;
+            while(atemp) {
+                atemp /= 10;
+                dcount++;
+            }
+            char strArr[dcount+1];
+
+            for (int b=0; b<dcount+1; b++) {
+                strArr[b] = btemp % 10;
+                btemp /= 10;
+            }
+            strArr[dcount+1] = '\0';
+//	    reverseArray(strArr, 0 , dcount+1);
+            intStrHelper(strArr);
+
+/*
+            for (int b=0; b<dcount+1; b++) {
+                strArr[b] = btemp % 10;
+                btemp /= 10;
+            }
+            strArr[dcount+1] = '\0';
+//	    reverseArray(strArr, 0 , dcount+1);
+            intStrHelper(strArr);
+*/
+}
+
+void reverseArray(int arr[], int start, int end) { 
+    int temp; 
+    while (start < end) { 
+        temp = arr[start];    
+        arr[start] = arr[end]; 
+        arr[end] = temp; 
+        start++; 
+        end--; 
+    }    
+}  
+
+void intStrHelper(char *s) {
+  while(*s != '\0') { putchar(*s++ + '0'); }
 }
 
 

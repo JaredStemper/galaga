@@ -42,5 +42,7 @@ void flush_uart(void);
 int getchar(void);
 int getchar2(void);
 void putstring(char *);
-
+void intStrHelper(char *s);
+void putIntString(int a);
+void reverseArray(int arr[], int start, int end);
 /* f3d_uart.h ends here */
