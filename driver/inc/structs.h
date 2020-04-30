@@ -100,3 +100,5 @@ void initArr(void);
 int enemyPositions[30][2];
 
 void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]);
+
+void makeEnemyBullet();

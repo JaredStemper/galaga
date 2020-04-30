@@ -222,7 +222,7 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
       bArray[j] = b1;
 
       //check heading to set bullet angle
-      f3d_mag_read(mag_data); //mags
+      f3d_mag_read(mag_data); //magxs
       heading = get_heading(mag_data);
       bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
       break;
@@ -231,3 +231,6 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
 
 }
 
+void makeEnemyBullet(){
+  
+}

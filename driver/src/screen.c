@@ -7,7 +7,7 @@ Gets info for level, lives, player ship, and enemy ships from struct.c
 
 
 #include <screen.h>
-
+#include <stdlib.h>
 
 
 
@@ -225,6 +225,26 @@ putchar(' ');
 
 //after collision, bullet array marks bullet index as 0
 
+int randomNumberGen(int lower, int upper){
+    int num = (rand() % (upper - lower + 1)) + lower ;
+  return num;
+}
+/*
+ * pseudo-randomly selects an enemy from the liveEnemies[] and makes a bullet near it
+*/
+void enemyShoot(struct enemy eArray[], int liveEnemies[]){  
+  int numOfShooters = randomNumberGen(1,7);
+
+  for(int i=0; i<numOfShooters; i++){
+    int shooter = randomNumberGen(0, MAX_ENEMY);
+
+    if(liveEnemies[shooter]){
+      makeEnemyBullet();
+    }
+  }
+  
+
+}
 
 int textDisplayDelay = 95;
 int enemyShiftDelay = 95;
