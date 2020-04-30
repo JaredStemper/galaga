@@ -285,8 +285,8 @@ int enemyShiftDelay = 5;
 int enemyShootDelay = 5;
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
-	playerPtr->life = 0;
-/*
+//	playerPtr->life = 0;
+
 	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 95; }
 
 	drawPlayer(playerPtr);
@@ -312,5 +312,6 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	enemyShiftDelay--;
 	enemyShootDelay--;
 	putchar('x');		
-*/
+
 }
+

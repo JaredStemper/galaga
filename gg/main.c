@@ -123,6 +123,7 @@ int game(void){
 			break;
 		case OVER:
 			drawEndScreen(pPtr);
+			while(1) { if(getchar2()) { state = SETT; break; } }
 			break;
 		}
 
