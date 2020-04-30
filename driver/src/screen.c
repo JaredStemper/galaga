@@ -265,13 +265,9 @@ void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, stru
 }
 
 int textDisplayDelay = 95;
-<<<<<<< HEAD
 int enemyShiftDelay = 5;
 
-=======
-int enemyShiftDelay = 95;
-int enemyShootDelay = 40;
->>>>>>> 9cc6a9cca4d22af6ad6603f8cff164101f59369e
+int enemyShootDelay = 5;
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 
