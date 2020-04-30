@@ -30,12 +30,12 @@ void drawEndScreen(struct player *playerPtr){
 	f3d_lcd_fillScreen2(BLACK);
 	if (playerPtr->life == 0) {
 		f3d_lcd_drawString(43,70,  "BAD JOOOB", RED,BLACK);
-		f3d_lcd_drawString(27,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(31,90,"press r to", WHITE, BLACK);
 		f3d_lcd_drawString(35,100, "to play", WHITE, BLACK);
 	}
 	else {
 		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
-		f3d_lcd_drawString(27,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(31,90,"press r to", WHITE, BLACK);
 		f3d_lcd_drawString(23,100, "to play again", WHITE, BLACK);	
 
 	}
