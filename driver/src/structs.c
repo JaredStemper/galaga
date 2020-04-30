@@ -52,12 +52,12 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 	  //if enemy is alive
 	  if (elifeArr[j]) {
 	    //if collision, set life to 0 and return 1 (for true)
-	    if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1, e.y2)) { //TODO: always returns true
+	    if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1, e.y2)) {
 	      elifeArr[j] = 0;
 	      blifeArr[i] = 0;
-	      e.life = 0; //deprecated?
+	      e.life = 0;
 	      p->score = p->score+5;
-	      enemyCounter--;
+	      --enemyCounter;
 	      return j; //returns index of enemy that got hit - for erasing in screen.c
 	    }
 	  }
@@ -215,7 +215,7 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
       heading = get_heading(mag_data);
       bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
       break;
-    } else{j++;} //ask Jared if he put this here or if I (kp) did?
+    } 
   }
 
 }
@@ -255,8 +255,6 @@ void makeEnemyBullet(struct enemy e, struct bullet bArray[], int liveBullets[], 
 
       
       break;
-    } else{j++;} 
+    }
   }
-  
-  
 }

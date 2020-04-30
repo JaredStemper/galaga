@@ -18,16 +18,24 @@ void drawStartScreen(void){
 	f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
 } 
 
+void drawEndLevelScreen(struct player *playerPtr){
+	f3d_lcd_fillScreen2(BLACK);
+		
+		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
+		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(20,100, "play next level", WHITE, BLACK);	
+
+} 
 void drawEndScreen(struct player *playerPtr){
 	f3d_lcd_fillScreen2(BLACK);
 	if (playerPtr->life == 0) {
 		f3d_lcd_drawString(43,70,  "BAD JOOOB", RED,BLACK);
-		f3d_lcd_drawString(25,90,"press any key", WHITE, BLACK);
-		f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
+		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(35,100, "to play", WHITE, BLACK);
 	}
 	else {
 		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
-		f3d_lcd_drawString(23,90,"press any key", WHITE, BLACK);
+		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
 		f3d_lcd_drawString(25,100, "to play again", WHITE, BLACK);	
 
 	}
@@ -240,8 +248,9 @@ int randShiftXList[] = {22, 28, -29, -26, 26, -25, 32, -35, -39, 21, -27, 35, 33
 int randShiftYList[] = {-3,-5,-4,-1,-4,-1,-4,-4,-2,-3,-5,-4,-1,-3,-3,-3,-3,-2,-3,-3,-3,-2,-5,-2,-5,-4,-2,-5,-4,-3,-4,-4,-3,-5,-3,-5,-4,-1,-4,-2,-4,-1,-3,-3,-3,-2,-3,-5,-1,-4,-5,-5,-5,-3,-4,-4,-2,-4,-3,-5,-2,-3,-2,-5,-1,-2,-5,-3,-2,-5,-1,-3,-2,-3,-2,-3,-3,-3,-2,-5,-5,-2,-3,-3,-1,-5,-3,-5,-4,-5,-2,-5,-4,-1,-3,-5,-2,-3,-5,-3,-5,-5,-4,-2,-1,-2,-3,-4,-4,-5,-1,-3,-1,-3,-2,-5,-1,-1,-1,-5,-1};
 
 /*
-TODO:
-	fix issue with definitions
+LevelOne:
+	only move horizontally
+LevelTwo:
 	move downward, in diagonals quick enough to scare the player
 */
 
@@ -336,6 +345,7 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 			moveEnemies(playerPtr, e, liveEnemy); //higher the last parameter, the slower enemies move down
 		}
 		else {
+			putchar('z');
 			moveEnemiesTwo(playerPtr, e, liveEnemy); //higher the last parameter, the slower enemies move down
 		}
 

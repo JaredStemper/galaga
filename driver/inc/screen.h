@@ -4,11 +4,8 @@
 
 
 void drawStartScreen(void);
-void drawEndScreen(struct player *p);
-
-
-
-  
+void drawEndLevelScreen(struct player *playerPtr);
+void drawEndScreen(struct player *p);  
 
 void drawBackground(struct player *p);
 void drawPlayerStats(struct player *p);
