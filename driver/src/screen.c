@@ -280,7 +280,7 @@ int randomNumberGen(int lower, int upper){
  * TODO: add to .h
 */
 void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, struct bullet bArray[], int liveBullets[]){  
-  int numOfShooters = randomNumberGen(0,4);
+  int numOfShooters = randomNumberGen(1,7);
 
   for(int i=0; i<numOfShooters; i++){
     int shooter = randomNumberGen(0, MAX_ENEMY);

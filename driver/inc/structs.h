@@ -43,6 +43,8 @@ struct enemy enemyArray[MAX_ENEMY];
 
 int usedEnemyPositions[MAX_ENEMY];
 
+int enemyCounter;
+
 
 /*
 enemyArray = { e1, e2, e3, e4, ... } list of enemies e1, e2, e3, e4, ...
