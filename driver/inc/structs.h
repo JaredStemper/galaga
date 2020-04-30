@@ -5,16 +5,18 @@
 
 #define MAX_ENEMY 30
 
-#define MAX_BULLET 50 
+#define MAX_BULLET 50
 
 #define CENTERX 63
-#define CENTERY 40
+#define CENTERY 40 //breaks moveEnemies when above 9
 
 #define ENEMY_WIDTH 4
 #define ENEMY_HEIGHT 4
 
 #define BULLET_WIDTH 2
 #define BULLET_HEIGHT 2
+
+
 
 //enemies
 struct enemy { 
@@ -30,40 +32,8 @@ struct enemy {
 	int y1,y2; //y1 is top, y2 is bottom
 };
 
-struct enemy e1;
-struct enemy *eptr1;
-
-struct enemy e2;
-struct enemy *eptr2;
-
-struct enemy e3;
-struct enemy *eptr3;
-
-struct enemy e4;
-struct enemy *eptr4;
-
-struct enemy e5;
-struct enemy *eptr5;
-
-struct enemy e6;
-struct enemy *eptr6;
-
-struct enemy e7;
-struct enemy *eptr7;
-
-struct enemy e8;
-struct enemy *eptr8;
-
-struct enemy e9;
-struct enemy *eptr9;
-
-struct enemy e10;
-struct enemy *eptr10;
-
 
 struct enemy enemyArray[MAX_ENEMY];
-
-//struct enemy enemyStructArray[MAX_ENEMY];
 
 int usedEnemyPositions[MAX_ENEMY];
 
@@ -72,12 +42,6 @@ int usedEnemyPositions[MAX_ENEMY];
 enemyArray = { e1, e2, e3, e4, ... } list of enemies e1, e2, e3, e4, ...
 
 arryLiveEnemies = { 0, 1, 1, 0, ... } e1 is dead, e2 is alive, e3 is alive, e4 is dead, ...
-*/
-
-/*
-drawenemies(pointer to array):
-	for structPointer in array:
-		drawEnemy(structPointer)
 */
 
 
@@ -91,6 +55,7 @@ struct bullet {
 	int y1,y2; //y1 is top, y2 is bottom
 
 	int shooter; //1 if player, 2 if enemy
+	int angle; //1 for left diagonal, 2 for straight, and 3 for right diagonol
 };
 
 struct bullet bulletArray[MAX_BULLET]; //changes from *bulletArray[MAX_BULLET]; -kp
@@ -110,6 +75,8 @@ struct player {
 	//coordinates
 	int x1,x2; //x1 is left, x2 is right
 	int y1,y2; //y1 is top, y2 is bottom
+
+	int starterHeading; //angle from magnometer grabbed at start of game
 
 	//score
 	int score; //initially set to 0

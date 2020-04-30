@@ -39,6 +39,7 @@ void start(void){
 	f3d_lcd_init();
 	f3d_uart_init();
 	f3d_systick_init();
+	f3d_mag_init();
 
 	//set all values of arrayLiveEnemies and usedEnemyPosiitons to zero (for more info look at lines 28-32 in structs.h)
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
@@ -68,6 +69,11 @@ void init_game(void){
 	p1.y2 = PLAYER_Y2;
 	p1.score = 66;
 	p1.level = 0;
+
+
+	float mag_d[3]; //mags
+	f3d_mag_read(mag_d);
+	p1.starterHeading = get_heading(mag_d);
 
 	makeEnemies(29, enemyArray, usedEnemyPositions); //create initial first 5 enemies
 

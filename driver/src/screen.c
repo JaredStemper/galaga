@@ -108,15 +108,42 @@ void eraseBullets(struct bullet b[], int liveBullet[]){
 void shoot(struct bullet bArray[], int liveBullets[]){
   //if bullet in liveBullets leaves the screen, mark as dead
   for(int i=0; i < MAX_BULLET; i++){
+    int yshift = -3;
+    int xshift = 3;
+
     if(liveBullets[i]){
-     bArray[i].y1 = bArray[i].y1-3;
-     bArray[i].y2 = bArray[i].y2-3;    
-	//if bullet hits top or bottom of screen, mark as dead
+	//if bullet is supposed to shoot straight
+	if(bArray[i].angle == 2) { 
+	     	bArray[i].y1 = bArray[i].y1 + yshift;
+	     	bArray[i].y2 = bArray[i].y2 + yshift;    
+	}
+	//if bullet is supposed to shoot left diagonal
+	else if(bArray[i].angle == 1) { 
+	     	bArray[i].y1 = bArray[i].y1 + yshift;
+	     	bArray[i].y2 = bArray[i].y2 + yshift;    
+	     	bArray[i].x1 = bArray[i].x1 - xshift;
+	     	bArray[i].x2 = bArray[i].x2 - xshift;    
+	}
+	//if bullet is supposed to shoot right diagonal
+	else if(bArray[i].angle == 3) { 
+	     	bArray[i].y1 = bArray[i].y1 + yshift;
+	     	bArray[i].y2 = bArray[i].y2 + yshift;    
+	     	bArray[i].x1 = bArray[i].x1 + xshift;
+	     	bArray[i].x2 = bArray[i].x2 + xshift;    
+	}
+	/* 128x160 are board dimensions */
+	//if bullet hits top or bottom of screen, mark as dead 
 	if(bArray[i].y1 >= 160 || bArray[i].y1 <= 0) { liveBullets[i] = 0; }
+	//if bullet hits left or right of screen, reverse movement
+	if(bArray[i].x1 >= 128) { 
+		bArray[i].angle = 1;
+	}
+	else if(bArray[i].x1 <= 0) {
+		bArray[i].angle = 2;
+	}
     }
   }  
 }
-
 void movePlayer(struct player *p, int input){
   switch(input){
   case 'a':
@@ -150,27 +177,43 @@ int randShiftList[] = {22, 28, -29, -26, 26, -25, 32, -35, -39, 21, -27, 35, 33,
 
 
 
-
 void moveEnemies(struct player *pPtr){
 	//shift CENTERX/CENTERY randomly, but take care not to go out of bounds
 
-	int shiftXby = randShiftList[CENTERY * pPtr->x2 % 121]; 	//uses second half of randList
-	int shiftYby = randShiftList[122 + CENTERX * pPtr->x1 % 242];	//uses first half of randList
 
-        putIntString(shiftXby);
-
+	int shiftXby = 50; //randShiftList[CENTERY * pPtr->x2 % 121]; 	//uses second half of randList
+	int shiftYby = 50; //randShiftList[122 + CENTERX * pPtr->x1 % 242];	//uses first half of randList
 /*
+putchar('a');
+//        putchar(CENTERY+'0');
+        putIntString(CENTERY);
+putchar(' ');
+putchar('b');
+        putIntString(CENTERX);
+*/
 	int finalX = CENTERX + shiftXby;
 	int finalY = CENTERY + shiftYby;
 
-	//128x160 are official board dimesnions. Check if LEFTMOST and RIGHTMOST values are within bounds x:0 and 128; y:0 and 160
+
+	//128x160 are official board dimensions. Check if LEFTMOST and RIGHTMOST values are within bounds x:0 and 128; y:0 and 160
 	//since the furthest enemy from center is +-30, if that final result is not in bounds, reverse shift (may result in slight teleportation by edges...)
 	if (finalX-30 < 0 || finalX+30 > 128) { finalX = CENTERX - shiftXby; } 
-	if (finalY-30 < 0 || finalY+30 > 160) { finalX = CENTERX - shiftXby; } 
+	if (finalY-30 < 0 || finalY+30 > 160) { finalY = CENTERY - shiftYby; } 
 
 	#define CENTERX finalX
 	#define CENTERY finalY
+/*
+putchar(' ');
+putchar('c');
+        putIntString(finalX);
+putchar(' ');
+putchar('d');
+        putIntString(finalY);
+putchar(' ');
+putchar(' ');
 */	
+
+
 }
 
 //after collision, bullet array marks bullet index as 0
@@ -182,54 +225,19 @@ int enemyShiftDelay = 95;
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 
-	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 5; }
+	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 95; }
 
 	drawPlayer(playerPtr);
 
 	if (enemyShiftDelay == 0) { 
 		eraseEnemies(e,liveEnemy);
-
-
-
-
-
-
-
-
-/*
-		int a = 69;
-		int atemp = a;
-		int btemp = a;
-		int count;
-		while(atemp) { atemp /= 10; count++; }
-		char strArr[count+1];
-		for (int b=0; b<count; b++) {
-			strArr[b] = btemp % 10;
-			btemp /= 10;
-			putchar(b + '0');
-		}
-		putchar('z');
-		strArr[count+1] = '\0';
-		//char aa[] = {'6','9','\0'};
-*/
-         
-
-
-
-
-
-
-
-
-
-
-		moveEnemies(playerPtr);//bases enemy movements partially on player location, to add to randomness of movement 
-		drawEnemies(e,liveEnemy); 
+		//moveEnemies(playerPtr);//bases enemy movements partially on player location, to add to randomness of movement
+		drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9
 		enemyShiftDelay = 95;
 	}
 
 	eraseBullets(b,liveBullet);
-	shoot(b,liveBullet);
+	shoot(b,liveBullet);//probably should rename to moveBullets
 	drawBullets(b,liveBullet);
 
 	textDisplayDelay--;

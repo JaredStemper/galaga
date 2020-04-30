@@ -10,5 +10,6 @@ void drawBar_horizontal(int start_x, int start_y ,int end ,uint16_t colour);
 void drawBar(int start_x, int start_y ,int end ,uint16_t colour);
 
 void angle_visual(float pitch, float roll);
+int bulletAngle(float heading, float ogHeading);
 void compass_visual(float heading);
 void displayGyroGraph(float x_pos, float y_pos, float z_pos);

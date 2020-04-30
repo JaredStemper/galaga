@@ -169,6 +169,8 @@ void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
 void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]){
   int x = (playerPtr->x1 + playerPtr->x2)/2;
   int y = playerPtr->y1;
+  float mag_data[3];
+  int heading;
 
   struct bullet b1;
   b1.x1 = x;
@@ -176,13 +178,19 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
   b1.y1 = y;
   b1.y2 = b1.y1+BULLET_HEIGHT;
   b1.color = 0xFFFF;
-  b1.shooter = 1; //needs to check if enemy or blayer before shooting/setting location
+  b1.shooter = 1; //needs to check if enemy or player before shooting/setting location
+  b1.angle = 2; //default bullet shoots straight
 
   for(int j=0; j<MAX_BULLET; j++){
     if(!liveBullets[j]){
-      liveBullets[j] = 1;
-      bArray[j] = b1;
-      break;
+	liveBullets[j] = 1;
+	bArray[j] = b1;
+
+	//check heading to set bullet angle
+	f3d_mag_read(mag_data); //mags
+	heading = get_heading(mag_data);
+	bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
+	break;
     } else{j++;}
   }
 

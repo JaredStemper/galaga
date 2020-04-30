@@ -84,12 +84,6 @@ float get_roll(float accel_data[]){
   return roll;
 }
 
-float get_heading(float mag_data[]){
-  float heading;  
-  heading = radianToDegree(atan2f(mag_data[1],mag_data[0]));
-  heading = heading + 180;
-  return heading;
-}
 
 int x_cen=63; int y_cen=79;
 int x_min=0; int y_min = 0;
@@ -117,6 +111,65 @@ void angle_visual(float pitch, float roll){
 
 
 /*/// Compass ///*/
+
+float get_heading(float mag_data[]){
+  float heading;  
+  heading = radianToDegree(atan2f(mag_data[1],mag_data[0]));
+  heading = heading + 180;
+  return heading;
+}
+
+//takes a startHeading (taken when game first starts) returns correct bullet angle off of changes to that
+int bulletAngle(float heading, float ogHeading){
+
+/*
+ogheading = 30
+
+cheading = 10 //i.e. -20 from start
+
+c heading = cheading - ogheading
+
+if negative, 360 + negative value will work
+
+ogheading = 325
+
+cheading = 350 //i.e. +25 from start
+
+c heading = cheading - ogheading
+*/
+
+  heading = heading - ogHeading;
+
+  if (heading < 0) {
+	heading = 360 + heading;
+  }
+
+
+  if(0<=heading && heading<22.5 || 337.5<=heading && heading<=360){//N; straight
+	return 2;
+  }
+  if(22.5<=heading && heading<67.5){//NE; right angle
+	return 3;	
+  }
+  if(67.5<=heading && heading<112.5){//E; right angle
+	return 3;	
+  }
+  if(112.5<=heading && heading<157.5){//SE; right angle
+	return 3;	
+  }
+  if(157.5<=heading && heading<205.5){//S; straight, just to fuck with the player
+	return 2;	
+  }
+  if(205.5<=heading && heading<247.5){//SW; left angle
+	return 1;	
+  }
+  if(247.5<=heading && heading<292.5){//W; left angle
+	return 1;	
+  }
+  if(292.5<=heading && heading<337.5){//NW; left angle
+	return 1;	
+  }
+}
 
 void compass_visual(float heading){
   int nx = 63; int sx = 63; int ex = 63+40; int wx = 63-40;
