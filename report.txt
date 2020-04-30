@@ -1,3 +1,5 @@
+GITHUB link to project: https://github.com/JaredStemper/galaga
+
 Report File for C335 Final Project Spring 2020 - Galaga
 
 Authors: Kunal Pendse(kpendse), Jared Stemper(jaastemp)
