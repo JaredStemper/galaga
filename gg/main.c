@@ -154,10 +154,9 @@ int game(void){
 	
 			break;
 		case OVER:
-			pPtr->level = 1;
-
 			drawEndScreen(pPtr);
 			drawPlayerStats(pPtr);
+			pPtr->level = 1;
 			while(1) {
 			  if(getchar2() == 'r') {
 			    f3d_lcd_fillScreen2(BLACK);
