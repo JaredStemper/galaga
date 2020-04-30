@@ -32,7 +32,7 @@ void eraseBullets(struct bullet b[], int liveBullet[]);
 void shoot(struct bullet bArray[], int liveBullets[]);
 
 void movePlayer(struct player *p, int input);
-void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[]);
+void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[], int);
 
 int randomNumberGen(int ,int);
 void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, struct bullet bArray[], int liveBullets[]);
