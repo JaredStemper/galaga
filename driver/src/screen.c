@@ -71,12 +71,17 @@ void drawEnemies(struct enemy e[], int liveEnemy[]){
 	}
   }
 }
+
 void eraseEnemies(struct enemy e[], int liveEnemy[]){
   for (int i=0; i<30; i++) {
 	if (liveEnemy[i]) {
 		eraseEnemy(e[i]);
 	}
   }
+}
+
+void eraseEnemyIndex(struct enemy e[], int enemyIndex){
+	eraseEnemy(e[enemyIndex]);
 }
 
 
@@ -241,8 +246,8 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	shoot(b,liveBullet);//probably should rename to moveBullets
 
 	//check for collisions
-	checkCollision(playerPtr, liveBullet, b, liveEnemy, e);
-
+	eraseEnemyIndex(e, checkCollision(playerPtr, liveBullet, b, liveEnemy, e)); //returns the index of the enemy that got hit
+		
 	drawBullets(b,liveBullet);
 	drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9
 

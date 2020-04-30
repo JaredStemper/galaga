@@ -12,6 +12,7 @@ void erasePlayer(struct player *p);
 
 void drawEnemy(struct enemy e);
 void eraseEnemy(struct enemy e);
+void eraseEnemyIndex(struct enemy e[], int enemyIndex);
 
 void drawEnemies(struct enemy e[], int liveEnemy[]);
 void eraseEnemies(struct enemy e[], int liveEnemy[]);

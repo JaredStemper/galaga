@@ -41,7 +41,7 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 	  if (p->lives <= 0) {
 	    p->life = 0;
 	  }
-	  return 1; //true, there was a collision
+	  return 99999; //true, there was a collision
 	}
       }
 
@@ -59,7 +59,7 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 	      blifeArr[i] = 0;
 	      e.life = 0; //deprecated?
 		putchar('z');
-	      return 1; //true, there was a collision
+	      return j; //returns index of enemy that got hit - for erasing in screen.c
 	    }
 	  }
 	}
