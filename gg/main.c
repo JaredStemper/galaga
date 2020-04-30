@@ -41,9 +41,6 @@ void start(void){
 	f3d_systick_init();
 	f3d_mag_init();
 
-	CENTERXv = CENTERX;
-	CENTERYv = CENTETY;
-
 	//set all values of arrayLiveEnemies and usedEnemyPosiitons to zero (for more info look at lines 28-32 in structs.h)
 	for (int i = 0; i < MAX_ENEMY; i++) { usedEnemyPositions[i] = 0; }
 	for (int i = 0; i < MAX_BULLET; i++) { usedBulletPositions[i] = 0; }

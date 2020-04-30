@@ -188,48 +188,32 @@ TODO:
 also check in ?someFunction? if enemies hit bottom, then gameOVER
 */
 
-void moveEnemies(struct player *pPtr){
-	//shift CENTERX/CENTERY randomly, but take care not to go out of bounds
+void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[]){
+  //shift currentX/currentY randomly, but take care not to go out of bounds
+  for (int i=0; i<MAX_ENEMY; i++) {
+    if(liveE[i]){
+      int currentX = eArr[i].x1;
+      int currentY = eArr[i].y1;				
 
+      int shiftXby = randShiftList[randomNumberGen(0,121)]; 	//uses first half of randList - should be -/+
+      int shiftYby = randShiftList[randomNumberGen(122,242)];	//uses second half of randList - should be only -
 
+      int finalX = currentX + shiftXby;
+      int finalY = currentY + shiftYby;
 
-	int shiftXby = 50; //randShiftList[CENTERY ** pPtr->x2 % 121]; 		//uses first half of randList
-	int shiftYby = 50; //randShiftList[122 + CENTERX ** pPtr->x1 % 242];	//uses second half of randList
-
-putchar('a');
-        putIntString(CENTERYv);
-
-putchar(' ');
-putchar('b');
-        putIntString(CENTERX);
-
-	int finalX = CENTERX + shiftXby;
-	int finalY = CENTERY + shiftYby;
-
-
-	//128x160 are official board dimensions. Check if LEFTMOST and RIGHTMOST values are within bounds x:0 and 128; y:0 and 160
-	//since the furthest enemy from center is +-30, if that final result is not in bounds, reverse shift (may result in slight teleportation by edges...)
-	if (finalX-30 < 0 || finalX+30 > 128) { finalX = CENTERX - shiftXby; } 
-	if (finalY-30 < 0 || finalY+30 > 160) { finalY = CENTERY - shiftYby; } 
-
-	#define CENTERX finalX
-	#define CENTERY finalY
-/*
-putchar(' ');
-putchar('c');
-        putIntString(CENTERY);
-putchar(' ');
-putchar('d');
-        putIntString(CENTERX);
-putchar(' ');
-putchar(' ');
-*/	
-
-
-
+      //128x160 are official board dimensions. Check if LEFTMOST and RIGHTMOST values are within bounds x:0 and 128; y:0 and 160
+      //since the furthest enemy from center is +-30, if that final result is not in bounds, reverse shift (may result in slight teleportation by edges...)
+      if (finalX-30 < 0 || finalX+30 > 128) { finalX = currentX - shiftXby; } 
+      if (finalY-30 < 0 || finalY+30 > 160) { finalY = currentY - shiftYby; } 
+	
+      //set new locations
+      eArr[i].x1 = finalX;
+      eArr[i].x2 = finalX + ENEMY_WIDTH;
+      eArr[i].y1 = finalY;
+      eArr[i].y2 = finalY + ENEMY_HEIGHT;
+    }
+  }
 }
-
-//after collision, bullet array marks bullet index as 0
 
 int randomNumberGen(int lower, int upper){
     int num = (rand() % (upper - lower + 1)) + lower ;
@@ -253,7 +237,7 @@ void enemyShoot(struct enemy eArray[], int liveEnemies[]){
 }
 
 int textDisplayDelay = 95;
-int enemyShiftDelay = 95;
+int enemyShiftDelay = 5;
 
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
@@ -264,8 +248,8 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 
 	if (enemyShiftDelay == 0) { 
 		eraseEnemies(e,liveEnemy);
-		moveEnemies(playerPtr); //bases enemy movements partially on player location, to add to randomness of movement
-		enemyShiftDelay = 95;
+		moveEnemies(playerPtr, e, liveEnemy); //bases enemy movements partially on player location, to add to randomness of movement
+		enemyShiftDelay = 5;
 	}
 
 	eraseBullets(b,liveBullet);
@@ -275,7 +259,7 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	eraseEnemyIndex(e, checkCollision(playerPtr, liveBullet, b, liveEnemy, e)); //returns the index of the enemy that got hit
 		
 	drawBullets(b,liveBullet);
-	drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9
+	drawEnemies(e,liveEnemy); 
 
 	textDisplayDelay--;
 	enemyShiftDelay--;
