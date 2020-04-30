@@ -79,7 +79,10 @@ void drawPlayerStats(struct player *p) {
 }
 
 void drawPlayer(struct player *p){
-  drawRect(p->x1, p->y1, p->x2, p->y2, RED);
+  drawRect(p->x1, p->y1, p->x2, p->y2, RED); //body
+  //drawPixel(); drawPixel();
+  //drawRect(); drawRect(); //sides
+  //drawRect(); //top
 }
 void erasePlayer(struct player *p){
   drawRect(p->x1, p->y1, p->x2, p->y2, BLACK);
