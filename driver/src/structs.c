@@ -56,6 +56,8 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 	      elifeArr[j] = 0;
 	      blifeArr[i] = 0;
 	      e.life = 0; //deprecated?
+	      p->score = p->score+5;
+	      enemyCounter--;
 	      return j; //returns index of enemy that got hit - for erasing in screen.c
 	    }
 	  }
@@ -241,10 +243,13 @@ void makeEnemyBullet(struct enemy e, struct bullet bArray[], int liveBullets[], 
       if(p->x1 == e.x1){
 	bArray[j].angle = 2;
       }
-      if(p->x1 < e.x1){
+      if(p->x1 < e.x1+20 || p->x1 > e.x1-20 ){
+	bArray[j].angle = 2;
+      }
+      if(p->x1 < e.x1-20){
 	bArray[j].angle = 1;
       }
-      if(p->x1 > e.x1){
+      if(p->x1 > e.x1+20){
 	bArray[j].angle = 3;
       }
 

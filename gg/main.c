@@ -67,7 +67,7 @@ void init_game(void){
 	p1.x2 = p1.x1+4;
 	p1.y1 = PLAYER_Y1;
 	p1.y2 = PLAYER_Y2;
-	p1.score = 66;
+	p1.score = 0;
 	p1.level = 0;
 
 	float mag_d[3]; //mags
@@ -76,7 +76,8 @@ void init_game(void){
 
 	p1.starterHeading = get_heading(mag_d);
 
-	makeEnemies(29, enemyArray, usedEnemyPositions); //create initial first 5 enemies
+	makeEnemies(10, enemyArray, usedEnemyPositions); //create initial first 5 enemies
+	enemyCounter = 10;
 
 
 //	putchar(enemyArray[i]->locationIndex + '0');
@@ -118,12 +119,19 @@ int game(void){
 			//move positions && check for collisions && update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 
-			if (pPtr->life == 0) { state = OVER; } 
+			if (pPtr->life <= 0) { state = OVER; }
+			if (enemyCounter==0) {state = OVER; }
 	
 			break;
 		case OVER:
 			drawEndScreen(pPtr);
-			while(1) { if(getchar2()) { state = SETT; break; } }
+			while(1) {
+			  if(getchar2()) {
+			    f3d_lcd_fillScreen2(BLACK);
+			    state = SETT;
+			    break;
+			  }
+			}
 			break;
 		}
 
