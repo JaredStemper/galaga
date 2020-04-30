@@ -34,8 +34,7 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 			
       //if bullet comes from enemy and hits player
       if (b.shooter == 2) {
-	putchar('2');
-	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p->x1,p->x2, p->y1,p->y2)) { 
+	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p->x1,p->x2, p->y1,p->y2)) { putchar('2');
 	  --p->lives; //lives start at 3, decrements until "dead"
 	  blifeArr[i] = 0;
 	  if (p->lives <= 0) {
@@ -226,11 +225,45 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
       heading = get_heading(mag_data);
       bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
       break;
-    } else{j++;}
+    } else{j++;} //ask Jared if he put this here or if I (kp) did?
   }
 
 }
+//TODO: add to .h
+void makeEnemyBullet(struct enemy e, struct bullet bArray[], int liveBullets[], struct player *p){
+  int x = (e.x1 + e.x2)/2;
+  int y = e.y1;
 
-void makeEnemyBullet(){
+  struct bullet b1;
+  b1.x1 = x;
+  b1.x2 = x+BULLET_WIDTH;
+  b1.y1 = y+ENEMY_HEIGHT;
+  b1.y2 = b1.y1+BULLET_HEIGHT;
+  b1.color = 0x07E0;
+  b1.shooter = 2; //needs to check if enemy or player before shooting/setting location
+  b1.angle = 2; //default bullet shoots straight
+
+  for(int j=0; j<MAX_BULLET; j++){
+    if(!liveBullets[j]){
+      liveBullets[j] = 1;
+      bArray[j] = b1;
+
+      //calculate bullet angle using player position and enemy position
+      //initial thought: if player is left of enemy, shoot towards left
+      if(p->x1 == e.x1){
+	bArray[j].angle = 2;
+      }
+      if(p->x1 < e.x1){
+	bArray[j].angle = 1;
+      }
+      if(p->x1 > e.x1){
+	bArray[j].angle = 3;
+      }
+
+      
+      break;
+    } else{j++;} 
+  }
+  
   
 }
