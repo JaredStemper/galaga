@@ -22,21 +22,21 @@ void drawEndLevelScreen(struct player *playerPtr){
 	f3d_lcd_fillScreen2(BLACK);
 		
 		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
-		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
-		f3d_lcd_drawString(20,100, "play next level", WHITE, BLACK);	
+		f3d_lcd_drawString(27,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(23,100, "play next level", WHITE, BLACK);	
 
 } 
 void drawEndScreen(struct player *playerPtr){
 	f3d_lcd_fillScreen2(BLACK);
 	if (playerPtr->life == 0) {
 		f3d_lcd_drawString(43,70,  "BAD JOOOB", RED,BLACK);
-		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(27,90,"press r to", WHITE, BLACK);
 		f3d_lcd_drawString(35,100, "to play", WHITE, BLACK);
 	}
 	else {
 		f3d_lcd_drawString(43,70,  "GOOOD JOB", GREEN,BLACK);
-		f3d_lcd_drawString(23,90,"press r to", WHITE, BLACK);
-		f3d_lcd_drawString(25,100, "to play again", WHITE, BLACK);	
+		f3d_lcd_drawString(27,90,"press r to", WHITE, BLACK);
+		f3d_lcd_drawString(23,100, "to play again", WHITE, BLACK);	
 
 	}
 } 
@@ -291,8 +291,9 @@ void moveEnemiesTwo(struct player *pPtr, struct enemy eArr[], int liveE[]){
       if (finalX-30 < 0 || finalX+30 > 128) { finalX = currentX - shiftXby; } 
       if (finalY-30 < 0)  { finalY = currentY - shiftYby; } 
       if (finalY > 160) { 
-		liveE[i] = 0;
+		--enemyCounter;
 		--pPtr->lives;
+		liveE[i] = 0;
 		if (pPtr->lives <= 0) { pPtr->life = 0; }
 	};
       //set new locations
