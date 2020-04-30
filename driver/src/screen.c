@@ -79,13 +79,25 @@ void drawPlayerStats(struct player *p) {
 }
 
 void drawPlayer(struct player *p){
-  drawRect(p->x1, p->y1, p->x2, p->y2, RED); //body
-  //drawPixel(); drawPixel();
-  //drawRect(); drawRect(); //sides
-  //drawRect(); //top
+  drawRect(p->x1, p->y1, p->x2, p->y2, RED);
+
+  f3d_lcd_drawPixel(p->x1 - 1, (p->y1 + p->y2)/2 , RED);
+  f3d_lcd_drawPixel(p->x2 + 1, (p->y1 + p->y2)/2 , RED);//flanks
+
+  drawRect(p->x1 - 3, (p->y1+p->y2)/2, p->x1 - 2, p->y2, RED);
+  drawRect(p->x2 + 2, (p->y1+p->y2)/2, p->x2 + 3, p->y2, RED); //flanks
+
+  drawRect((p->x1+p->x2)/2, p->y1 + 2,(p->x1+p->x2)/2 + 1, p->y1, RED); //turret
 }
 void erasePlayer(struct player *p){
   drawRect(p->x1, p->y1, p->x2, p->y2, BLACK);
+   f3d_lcd_drawPixel(p->x1 - 1, (p->y1 + p->y2)/2 , BLACK);
+  f3d_lcd_drawPixel(p->x2 + 1, (p->y1 + p->y2)/2 , BLACK);//flanks
+
+  drawRect(p->x1 - 3, (p->y1+p->y2)/2, p->x1 - 2, p->y2, BLACK);
+  drawRect(p->x2 + 2, (p->y1+p->y2)/2, p->x2 + 3, p->y2, BLACK); //flanks
+
+  drawRect((p->x1+p->x2)/2, p->y1 + 2,(p->x1+p->x2)/2 + 1, p->y1, BLACK); //turret
 }
 
 
