@@ -7,6 +7,9 @@
 
 #define MAX_BULLET 50
 
+int CENTERXv;
+int CENTERYv;
+
 #define CENTERX 63
 #define CENTERY 40 //breaks moveEnemies when above 9
 //seems to reset to values of 63 and 5 everytime, not sure why

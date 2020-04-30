@@ -180,7 +180,13 @@ void movePlayer(struct player *p, int input){
 
 int randShiftList[] = {22, 28, -29, -26, 26, -25, 32, -35, -39, 21, -27, 35, 33, -33, 23, 27, 28, -38, 31, 36, 26, 40, -40, -27, 22, 31, 39, 32, -31, 20, -40, -32, -29, 27, 26, 37, 26, -39, -36, 23, 23, -40, 38, -34, -34, -25, -25, 20, 37, 36, 24, -34, -36, 34, -28, 20, -28, 36, -24, -20, -40, 34, -36, -33, -20, -34, -27, 34, 25, -21, -24, 28, -24, 24, -26, -33, 32, 23, 34, -33, 21, 33, 34, -29, -20, 31, -22, -38, -39, -30, 40, -21, -24, 21, 32, 20, -25, 36, 21, -36, -21, -40, -32, 26, 32, 35, 35, -23, -26, -36, 31, 39, 29, 26, -23, 37, 20, -32, -38, 34, 36, 31, 37, -40, -21, 21, -30, -20, -40, -30, 39, 26, 28, 36, -28, -31, 37, -38, -36, 32, -40, 25, 29, -25, 24, -20, -34, 29, 34, 22, -38, 23, -30, 31, -36, 26, -24, -27, 27, -37, 32, 39, -34, 36, 22, -40, -32, 34, 30, 23, -31, 26, -22, -33, -31, -25, -27, -26, -32, 21, -22, 37, 28, -35, 21, -26, 20, 22, 28, -24, -40, -34, 20, -30, 28, -24, -22, -37, 36, 36, 22, -25, 28, -36, -35, -33, 33, -36, 26, -30, 40, -20, 20, -33, 34, 32, 22, -23, 20, -33, -22, -39, 20, -26, 38, -36, -38, 20, -34, -23, 38, 23, -29, 37, 22, -35, 29, 23, -38, 30, -23, -31};
 
+/*
+TODO:
+	fix issue with definitions
+	move downward, in diagonals quick enough to scare the player
 
+also check in ?someFunction? if enemies hit bottom, then gameOVER
+*/
 
 void moveEnemies(struct player *pPtr){
 	//shift CENTERX/CENTERY randomly, but take care not to go out of bounds
@@ -191,7 +197,7 @@ void moveEnemies(struct player *pPtr){
 	int shiftYby = 50; //randShiftList[122 + CENTERX ** pPtr->x1 % 242];	//uses second half of randList
 
 putchar('a');
-        putIntString(CENTERY);
+        putIntString(CENTERYv);
 
 putchar(' ');
 putchar('b');
@@ -238,7 +244,7 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 
 	if (enemyShiftDelay == 0) { 
 		eraseEnemies(e,liveEnemy);
-//		moveEnemies(playerPtr); //bases enemy movements partially on player location, to add to randomness of movement
+		moveEnemies(playerPtr); //bases enemy movements partially on player location, to add to randomness of movement
 		enemyShiftDelay = 95;
 	}
 

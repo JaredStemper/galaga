@@ -34,7 +34,6 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 			
       //if bullet comes from enemy and hits player
       if (b.shooter == 2) {
-	putchar('2');
 	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p->x1,p->x2, p->y1,p->y2)) { 
 	  --p->lives; //lives start at 3, decrements until "dead"
 	  blifeArr[i] = 0;
@@ -47,7 +46,6 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 
       //if bullet comes from player and hits enemy
       if(b.shooter == 1){
-//	putchar('1');
 	//check every live enemy
 	for (int j=0; j<MAX_ENEMY; j++) {
 	  struct enemy e = eArr[j];
@@ -58,7 +56,6 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
 	      elifeArr[j] = 0;
 	      blifeArr[i] = 0;
 	      e.life = 0; //deprecated?
-		putchar('z');
 	      return j; //returns index of enemy that got hit - for erasing in screen.c
 	    }
 	  }
@@ -73,34 +70,24 @@ int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int 
   int collision = 0;
   //if tl
   if(pointInRectangle(bx1, by1, x1, x2, y1, y2)) {
-	putchar('a');
 	collision = 1;
   }
   //if tr
  if (pointInRectangle(bx2, by1, x1, x2, y1, y2)) {
-	putchar('b');
 	collision = 1;
   }
   //if bl
  if (pointInRectangle(bx1, by2, x1, x2, y1, y2)) {
-	putchar('c');
 	collision = 1;
   }
   //if br
   if (pointInRectangle(bx2, by2, x1, x2, y1, y2)) {
-	putchar('d');
 	collision = 1;
   }
   //if rectangle is not in rectangle
   return collision; // default no collision
 }
-/*
-.
 
-----
-|  |
-----
-*/
 int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
   if (x >= x1 && x <= x2){
 	if ( y >= y1 && y <= y2) {
