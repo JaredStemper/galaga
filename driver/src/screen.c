@@ -81,7 +81,7 @@ void eraseEnemies(struct enemy e[], int liveEnemy[]){
 }
 
 void eraseEnemyIndex(struct enemy e[], int enemyIndex){
-	eraseEnemy(e[enemyIndex]);
+	if (enemyIndex != 99999) { eraseEnemy(e[enemyIndex]); }
 }
 
 
@@ -286,12 +286,15 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	shoot(b,liveBullet);//probably should rename to moveBullets
 
 	//check for collisions
+	putchar('z');		
 	eraseEnemyIndex(e, checkCollision(playerPtr, liveBullet, b, liveEnemy, e)); //returns the index of the enemy that got hit
-		
 	drawBullets(b,liveBullet);
+	putchar('y');		
 	drawEnemies(e,liveEnemy); 
 
 	textDisplayDelay--;
 	enemyShiftDelay--;
 	enemyShootDelay--;
+	putchar('x');		
+
 }

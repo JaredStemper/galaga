@@ -1,5 +1,5 @@
 // Game States
-enum {SETT, GAME};//PAUSE, EXIT
+enum {SETT, GAME, OVER};
 
 void init_game(void);
 void start(void);

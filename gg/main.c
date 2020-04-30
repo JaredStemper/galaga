@@ -118,11 +118,9 @@ int game(void){
 			//move positions && check for collisions && update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 
-
+			if (pPtr->life == 0) { state = OVER; } 
 	
 			break;
-		//case PAUSE: //pauses game "time"
-		//case EXIT: //ends and exits game
 		}
 	}
 
