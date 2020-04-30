@@ -11,6 +11,7 @@ void drawEndScreen(struct player *p);
   
 
 void drawBackground(struct player *p);
+void drawPlayerStats(struct player *p);
 
 void drawPlayer(struct player *p);
 void erasePlayer(struct player *p);

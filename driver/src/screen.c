@@ -56,6 +56,20 @@ void drawBackground(struct player *p){
  
 }
 
+void drawPlayerStats(struct player *p) {
+  //display level
+  sprintf(level, "Level: %d", p->level);
+  f3d_lcd_drawString(75,150,level,WHITE,BLACK);
+
+  //display lives
+  sprintf(level, "%d lives", p->lives);
+  f3d_lcd_drawString(5,150,level,WHITE,BLACK);
+  
+  //score
+  sprintf(level, "Score: %d", p->score);
+  f3d_lcd_drawString(45,5,level,WHITE,BLACK);
+}
+
 void drawPlayer(struct player *p){
   drawRect(p->x1, p->y1, p->x2, p->y2, RED);
 }
@@ -279,15 +293,15 @@ void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, stru
 
 }
 
-int textDisplayDelay = 95;
+int textDisplayDelay = 20;
+int playerDelay = 0;
 int enemyShiftDelay = 5;
 
 int enemyShootDelay = 5;
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 //	playerPtr->life = 0;
-
-	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 95; }
+	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 20; }
 
 	drawPlayer(playerPtr);
 
@@ -302,16 +316,17 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	shoot(b,liveBullet);//probably should rename to moveBullets
 
 	//check for collisions
-	putchar('z');		
 	eraseEnemyIndex(e, checkCollision(playerPtr, liveBullet, b, liveEnemy, e)); //returns the index of the enemy that got hit
 	drawBullets(b,liveBullet);
-	putchar('y');		
 	drawEnemies(e,liveEnemy); 
 
+
+	if (playerDelay == 10){ drawPlayerStats(playerPtr); playerDelay = 0; }
+
+	playerDelay++;
 	textDisplayDelay--;
 	enemyShiftDelay--;
 	enemyShootDelay--;
-	putchar('x');		
 
 }
 

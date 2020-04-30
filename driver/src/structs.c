@@ -35,7 +35,6 @@ int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int e
       //if bullet comes from enemy and hits player
       if (b.shooter == 2) {
 	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p->x1,p->x2, p->y1,p->y2)) { 
-	  putchar(p->lives + '0');
 	  --p->lives; //lives start at 3, decrements until "dead"
 	  blifeArr[i] = 0;
 	  if (p->lives <= 0) {
