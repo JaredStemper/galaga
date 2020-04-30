@@ -117,38 +117,65 @@ void shoot(struct bullet bArray[], int liveBullets[]){
     int xshift = 3;
 
     if(liveBullets[i]){
+      //if bullet is shot by player
+      if(bArray[i].shooter==1){
 	//if bullet is supposed to shoot straight
 	if(bArray[i].angle == 2) { 
-	     	bArray[i].y1 = bArray[i].y1 + yshift;
-	     	bArray[i].y2 = bArray[i].y2 + yshift;    
+	  bArray[i].y1 = bArray[i].y1 + yshift;
+	  bArray[i].y2 = bArray[i].y2 + yshift;    
 	}
 	//if bullet is supposed to shoot left diagonal
 	else if(bArray[i].angle == 1) { 
-	     	bArray[i].y1 = bArray[i].y1 + yshift;
-	     	bArray[i].y2 = bArray[i].y2 + yshift;    
-	     	bArray[i].x1 = bArray[i].x1 - xshift;
-	     	bArray[i].x2 = bArray[i].x2 - xshift;    
+	  bArray[i].y1 = bArray[i].y1 + yshift;
+	  bArray[i].y2 = bArray[i].y2 + yshift;    
+	  bArray[i].x1 = bArray[i].x1 - xshift;
+	  bArray[i].x2 = bArray[i].x2 - xshift;    
 	}
 	//if bullet is supposed to shoot right diagonal
 	else if(bArray[i].angle == 3) { 
-	     	bArray[i].y1 = bArray[i].y1 + yshift;
-	     	bArray[i].y2 = bArray[i].y2 + yshift;    
-	     	bArray[i].x1 = bArray[i].x1 + xshift;
-	     	bArray[i].x2 = bArray[i].x2 + xshift;    
+	  bArray[i].y1 = bArray[i].y1 + yshift;
+	  bArray[i].y2 = bArray[i].y2 + yshift;    
+	  bArray[i].x1 = bArray[i].x1 + xshift;
+	  bArray[i].x2 = bArray[i].x2 + xshift;    
 	}
-	/* 128x160 are board dimensions */
+      }
+
+      //if bullet is shot by enemy TODO: make bullet shoot towards player(at an angle)
+      if(bArray[i].shooter==2){
+	//if bullet is suppposed to shoot straight
+	if(bArray[i].angle == 2) {
+	  bArray[i].y1 = bArray[i].y1 - yshift;
+	  bArray[i].y2 = bArray[i].y2 - yshift;
+	}
+	//if bullet is supposed to shoot left diagonal
+	else if(bArray[i].angle == 1) {
+	  bArray[i].y1 = bArray[i].y1 - yshift;
+	  bArray[i].y2 = bArray[i].y2 - yshift;    
+	  bArray[i].x1 = bArray[i].x1 - xshift;
+	  bArray[i].x2 = bArray[i].x2 - xshift;
+	}
+	//if bullet is supposed to shoot right diagonal
+	else if(bArray[i].angle == 3) {
+	  bArray[i].y1 = bArray[i].y1 - yshift;
+	  bArray[i].y2 = bArray[i].y2 - yshift;    
+	  bArray[i].x1 = bArray[i].x1 + xshift;
+	  bArray[i].x2 = bArray[i].x2 + xshift;  
+	}
+      }
+    }
+    /* 128x160 are board dimensions */
 	//if bullet hits top or bottom of screen, mark as dead 
 	if(bArray[i].y1 >= 160 || bArray[i].y1 <= 0) { liveBullets[i] = 0; }
 	//if bullet hits left or right of screen, reverse movement
 	if(bArray[i].x2 >= 128) { 
-		bArray[i].angle = 1;
+	  bArray[i].angle = 1;
 	}
 	else if(bArray[i].x1 <= 0) {
-		bArray[i].angle = 3;
+	  bArray[i].angle = 3;
 	}
-    }
-  }  
+  }
 }
+
 void movePlayer(struct player *p, int input){
   switch(input){
   case 'a':
@@ -221,15 +248,16 @@ int randomNumberGen(int lower, int upper){
 }
 /*
  * pseudo-randomly selects an enemy from the liveEnemies[] and makes a bullet near it
+ * TODO: add to .h
 */
-void enemyShoot(struct enemy eArray[], int liveEnemies[]){  
-  int numOfShooters = randomNumberGen(1,7);
+void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, struct bullet bArray[], int liveBullets[]){  
+  int numOfShooters = randomNumberGen(0,4);
 
   for(int i=0; i<numOfShooters; i++){
     int shooter = randomNumberGen(0, MAX_ENEMY);
 
     if(liveEnemies[shooter]){
-      makeEnemyBullet();
+      makeEnemyBullet(eArray[shooter], bArray, liveBullets, p);
     }
   }
   
@@ -237,8 +265,13 @@ void enemyShoot(struct enemy eArray[], int liveEnemies[]){
 }
 
 int textDisplayDelay = 95;
+<<<<<<< HEAD
 int enemyShiftDelay = 5;
 
+=======
+int enemyShiftDelay = 95;
+int enemyShootDelay = 40;
+>>>>>>> 9cc6a9cca4d22af6ad6603f8cff164101f59369e
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
 
@@ -253,6 +286,7 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	}
 
 	eraseBullets(b,liveBullet);
+	if(enemyShootDelay==0){enemyShoot(e, liveEnemy, playerPtr, b, liveBullet); enemyShootDelay=40;}
 	shoot(b,liveBullet);//probably should rename to moveBullets
 
 	//check for collisions
@@ -263,4 +297,5 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 
 	textDisplayDelay--;
 	enemyShiftDelay--;
+	enemyShootDelay--;
 }

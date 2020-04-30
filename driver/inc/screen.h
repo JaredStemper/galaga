@@ -29,6 +29,6 @@ void movePlayer(struct player *p, int input);
 void moveEnemies(struct player *pPtr, struct enemy eArr[], int liveE[]);
 
 int randomNumberGen(int ,int);
-void enemyShoot(struct enemy eArray[], int liveEnemies[]);
+void enemyShoot(struct enemy eArray[], int liveEnemies[], struct player *p, struct bullet bArray[], int liveBullets[]);
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]);
