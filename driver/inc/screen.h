@@ -4,6 +4,11 @@
 
 
 void drawStartScreen(void);
+void drawEndScreen(struct player *p);
+
+
+
+  
 
 void drawBackground(struct player *p);
 

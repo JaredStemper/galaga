@@ -96,7 +96,7 @@ int game(void){
 
 	static int state = SETT;
 
-	//clear previous text, but leave galage for a background	
+	//clear previous text, but leave galaga for a background	
 	f3d_lcd_drawString(25,90,"press any key", BLACK, BLACK);
 	f3d_lcd_drawString(40,100, "to play", BLACK, BLACK);
 
@@ -121,7 +121,11 @@ int game(void){
 			if (pPtr->life == 0) { state = OVER; } 
 	
 			break;
+		case OVER:
+			drawEndScreen(pPtr);
+			break;
 		}
+
 	}
 
 }

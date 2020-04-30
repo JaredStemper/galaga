@@ -18,6 +18,21 @@ void drawStartScreen(void){
 	f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
 } 
 
+void drawEndScreen(struct player *playerPtr){
+	f3d_lcd_fillScreen2(BLACK);
+	if (playerPtr->life == 0) {
+		f3d_lcd_drawString(43,70,  "BAD JOOOB", RED,BLACK);
+		f3d_lcd_drawString(25,90,"press any key", WHITE, BLACK);
+		f3d_lcd_drawString(40,100, "to play", WHITE, BLACK);
+	}
+	else {
+		f3d_lcd_drawString(45,70,  "GOOOD JOB", GREEN,BLACK);
+		f3d_lcd_drawString(21,90,"press any key", WHITE, BLACK);
+		f3d_lcd_drawString(40,100, "to play again", WHITE, BLACK);	
+
+	}
+} 
+
 
 
 char level[10];
@@ -270,7 +285,8 @@ int enemyShiftDelay = 5;
 int enemyShootDelay = 5;
 
 void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct bullet b[], int liveBullet[]) {
-
+	playerPtr->life = 0;
+/*
 	if (textDisplayDelay == 0){ f3d_lcd_drawString(45,70,  "GALAGA", RED,BLACK); textDisplayDelay = 95; }
 
 	drawPlayer(playerPtr);
@@ -296,5 +312,5 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 	enemyShiftDelay--;
 	enemyShootDelay--;
 	putchar('x');		
-
+*/
 }
