@@ -135,11 +135,11 @@ void shoot(struct bullet bArray[], int liveBullets[]){
 	//if bullet hits top or bottom of screen, mark as dead 
 	if(bArray[i].y1 >= 160 || bArray[i].y1 <= 0) { liveBullets[i] = 0; }
 	//if bullet hits left or right of screen, reverse movement
-	if(bArray[i].x1 >= 128) { 
+	if(bArray[i].x2 >= 128) { 
 		bArray[i].angle = 1;
 	}
 	else if(bArray[i].x1 <= 0) {
-		bArray[i].angle = 2;
+		bArray[i].angle = 3;
 	}
     }
   }  
@@ -181,16 +181,17 @@ void moveEnemies(struct player *pPtr){
 	//shift CENTERX/CENTERY randomly, but take care not to go out of bounds
 
 
-	int shiftXby = 50; //randShiftList[CENTERY * pPtr->x2 % 121]; 	//uses second half of randList
-	int shiftYby = 50; //randShiftList[122 + CENTERX * pPtr->x1 % 242];	//uses first half of randList
-/*
+
+	int shiftXby = 50; //randShiftList[CENTERY ** pPtr->x2 % 121]; 		//uses first half of randList
+	int shiftYby = 50; //randShiftList[122 + CENTERX ** pPtr->x1 % 242];	//uses second half of randList
+
 putchar('a');
-//        putchar(CENTERY+'0');
         putIntString(CENTERY);
+
 putchar(' ');
 putchar('b');
         putIntString(CENTERX);
-*/
+
 	int finalX = CENTERX + shiftXby;
 	int finalY = CENTERY + shiftYby;
 
@@ -205,13 +206,14 @@ putchar('b');
 /*
 putchar(' ');
 putchar('c');
-        putIntString(finalX);
+        putIntString(CENTERY);
 putchar(' ');
 putchar('d');
-        putIntString(finalY);
+        putIntString(CENTERX);
 putchar(' ');
 putchar(' ');
 */	
+
 
 
 }
@@ -219,7 +221,7 @@ putchar(' ');
 //after collision, bullet array marks bullet index as 0
 
 
-int textDisplayDelay = 5;
+int textDisplayDelay = 95;
 int enemyShiftDelay = 95;
 
 
@@ -231,14 +233,18 @@ void drawAll(struct player *playerPtr, struct enemy e[], int liveEnemy[], struct
 
 	if (enemyShiftDelay == 0) { 
 		eraseEnemies(e,liveEnemy);
-		//moveEnemies(playerPtr);//bases enemy movements partially on player location, to add to randomness of movement
-		drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9
+//		moveEnemies(playerPtr); //bases enemy movements partially on player location, to add to randomness of movement
 		enemyShiftDelay = 95;
 	}
 
 	eraseBullets(b,liveBullet);
 	shoot(b,liveBullet);//probably should rename to moveBullets
+
+	//check for collisions
+	putchar(checkCollision(playerPtr, liveBullet, b, liveEnemy, e) + '0');
+
 	drawBullets(b,liveBullet);
+	drawEnemies(e,liveEnemy); //TODO: fix issue with CENTERY being greater than 9
 
 	textDisplayDelay--;
 	enemyShiftDelay--;

@@ -9,7 +9,7 @@
 
 #define CENTERX 63
 #define CENTERY 40 //breaks moveEnemies when above 9
-
+//seems to reset to values of 63 and 5 everytime, not sure why
 #define ENEMY_WIDTH 4
 #define ENEMY_HEIGHT 4
 
@@ -87,11 +87,9 @@ struct player {
 struct player p1;
 struct player *pPtr;
 
-int checkEnemyCollision(struct bullet *b, struct enemy *e); //Bullet b, Enemy e);
+int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int elifeArr[], struct enemy eArr[]);
 
-int checkPlayerCollision(struct bullet *b, struct player *p); //Bullet b, Player p);
-
-int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2, int life);
+int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2);
 
 int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2);
 

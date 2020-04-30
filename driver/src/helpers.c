@@ -1,8 +1,9 @@
 /*Helper Functions from previous labs*/
 
-#include <stdio.h>
+//#include <stdio.h>
 #include <math.h>
 #include <f3d_lcd_sd.h>
+#include <f3d_uart.h>
 
 /*/// Drawing shapes  ///*/
 
@@ -112,9 +113,9 @@ void angle_visual(float pitch, float roll){
 
 /*/// Compass ///*/
 
-float get_heading(float mag_data[]){
+float get_heading(float magData[]){
   float heading;  
-  heading = radianToDegree(atan2f(mag_data[1],mag_data[0]));
+  heading = radianToDegree(atan2f(magData[1],magData[0]));
   heading = heading + 180;
   return heading;
 }
@@ -125,7 +126,7 @@ int bulletAngle(float heading, float ogHeading){
 /*
 ogheading = 30
 
-cheading = 10 //i.e. -20 from start
+currheading = 10 //i.e. -20 from start
 
 c heading = cheading - ogheading
 
@@ -136,6 +137,9 @@ ogheading = 325
 cheading = 350 //i.e. +25 from start
 
 c heading = cheading - ogheading
+
+og 360
+
 */
 
   heading = heading - ogHeading;
@@ -148,8 +152,8 @@ c heading = cheading - ogheading
   if(0<=heading && heading<22.5 || 337.5<=heading && heading<=360){//N; straight
 	return 2;
   }
-  if(22.5<=heading && heading<67.5){//NE; right angle
-	return 3;	
+  if(22.5<=heading && heading<67.5){//NE; straight angle
+	return 2;	
   }
   if(67.5<=heading && heading<112.5){//E; right angle
 	return 3;	
@@ -166,8 +170,8 @@ c heading = cheading - ogheading
   if(247.5<=heading && heading<292.5){//W; left angle
 	return 1;	
   }
-  if(292.5<=heading && heading<337.5){//NW; left angle
-	return 1;	
+  if(292.5<=heading && heading<337.5){//NW; straight angle
+	return 2;	
   }
 }
 

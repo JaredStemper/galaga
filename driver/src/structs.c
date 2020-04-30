@@ -18,57 +18,94 @@
 
 /*//// Collisions ////*/
 
+
 //should this function be void? or is there another check that needs to be done afterwards -> doing this because it makes testing easier
-int checkEnemyCollision(struct bullet *b, struct enemy *e) {
-  //if collision, set life to 0 and return 1 (for true)
-  if (ifCollision(b->x1,b->x2, b->y1,b->y2, e->x1,e->x2, e->y1,e->y2, e->life)) { 
-    usedEnemyPositions[e->locationIndex] = 0;
-    e->life = 0;
-    return 1; //true, there was a collision
-  }
-  return 0; //false, no collision
-}
 
-//checks coordinates, struct type
-int checkPlayerCollision(struct bullet *b, struct player *p) {
-  if (ifCollision(b->x1,b->x2, b->y1,b->y2, p->x1,p->x2, p->y1,p->y2, p->life)) { 
-    --p->lives;
-    if (p->lives <= 0) {
-      p->life = 0;
+
+/*
+  blife and elife arr
+  .life for enemies
+*/
+int checkCollision(struct player *p, int blifeArr[], struct bullet bArr[], int elifeArr[], struct enemy eArr[]) {
+  //check for every live bullet
+  for (int i=0; i<MAX_BULLET; i++) {
+    if (blifeArr[i]) {
+      struct bullet b = bArr[i];
+			
+      //if bullet comes from enemy and hits player
+      if (b.shooter == 2) {
+	putchar('2');
+	if (ifCollision(b.x1,b.x2, b.y1,b.y2, p->x1,p->x2, p->y1,p->y2)) { 
+	  --p->lives; //lives start at 3, decrements until "dead"
+	  blifeArr[i] = 0;
+	  if (p->lives <= 0) {
+	    p->life = 0;
+	  }
+	  return 1; //true, there was a collision
+	}
+      }
+
+      //if bullet comes from player and hits enemy
+      if(b.shooter == 1){
+//	putchar('1');
+	//check every live enemy
+	for (int j=0; i<MAX_ENEMY; j++) {
+	  struct enemy e = eArr[j];
+	  //if enemy is alive
+	  if (elifeArr[j]) {
+	    //if collision, set life to 0 and return 1 (for true)
+	putchar(' ');
+	    if (ifCollision(b.x1,b.x2, b.y1,b.y2, e.x1,e.x2, e.y1, e.y2)) { 
+	      elifeArr[j] = 0;
+	      blifeArr[i] = 0;
+	      e.life = 0; //deprecated?
+	      return 1; //true, there was a collision
+	    }
+	  }
+	}
+      }
     }
-    return 1; //true, there was a collision
   }
   return 0; //false, no collision
 }
 
-int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2, int life) {
-
-
-  //if life is false, don't check
-  if(!life) { return 0; }
+int ifCollision(int bx1, int bx2, int by1, int by2, int x1, int x2, int y1, int y2) {
+  int collision = 0;
   //if tl
-  else if(pointInRectangle(bx1, by1, x1, x2, y1, y2)) {
-    return 1;
+  if(pointInRectangle(bx1, by1, x1, x2, y1, y2)) {
+	putchar('a');
+	collision = 1;
   }
   //if tr
-  else if (pointInRectangle(bx2, by1, x1, x2, y1, y2)) {
-    return 1;	
+ if (pointInRectangle(bx2, by1, x1, x2, y1, y2)) {
+	putchar('b');
+	collision = 1;
   }
   //if bl
-  else if (pointInRectangle(bx1, by2, x1, x2, y1, y2)) {
-    return 1;	
+ if (pointInRectangle(bx1, by2, x1, x2, y1, y2)) {
+	putchar('c');
+	collision = 1;
   }
   //if br
-  else if (pointInRectangle(bx2, by2, x1, x2, y1, y2)) {
-    return 1;	
+  if (pointInRectangle(bx2, by2, x1, x2, y1, y2)) {
+	putchar('d');
+	collision = 1;
   }
   //if rectangle is not in rectangle
-  else { return 1; }
+  return collision; // default no collision
 }
+/*
+.
 
+----
+|  |
+----
+*/
 int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
-  if (x > x1 && x < x2 && y < y1 && y > y2) {
-    return 1; 
+  if (x >= x1 && x <= x2){
+	if ( y >= y1 && y <= y2) {
+		    return 1; 
+	}
   }
 
   return 0;
@@ -108,33 +145,33 @@ int pointInRectangle(int x, int y, int x1, int x2, int y1, int y2) {
 */
 
 int enemyPositions[30][2] = {
-    {CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10},
-    {CENTERX-20,CENTERY+20}, {CENTERX+20,CENTERY-20}, {CENTERX-20,CENTERY-20}, {CENTERX+20,CENTERY+20},
+  {CENTERX,CENTERY}, {CENTERX-10,CENTERY+10}, {CENTERX+10,CENTERY-10}, {CENTERX-10,CENTERY-10}, {CENTERX+10,CENTERY+10},
+  {CENTERX-20,CENTERY+20}, {CENTERX+20,CENTERY-20}, {CENTERX-20,CENTERY-20}, {CENTERX+20,CENTERY+20},
 
-    {CENTERX,CENTERY+10}, {CENTERX-10,CENTERY+20}, {CENTERX-10,CENTERY-20}, {CENTERX+10,CENTERY-20}, {CENTERX+10,CENTERY+20},
-    {CENTERX,CENTERY-10}, {CENTERX-20,CENTERY+10}, {CENTERX-20,CENTERY-10}, {CENTERX+20,CENTERY-10}, {CENTERX+20,CENTERY+10},
+  {CENTERX,CENTERY+10}, {CENTERX-10,CENTERY+20}, {CENTERX-10,CENTERY-20}, {CENTERX+10,CENTERY-20}, {CENTERX+10,CENTERY+20},
+  {CENTERX,CENTERY-10}, {CENTERX-20,CENTERY+10}, {CENTERX-20,CENTERY-10}, {CENTERX+20,CENTERY-10}, {CENTERX+20,CENTERY+10},
 
-    {CENTERX-10,CENTERY}, {CENTERX,CENTERY+20}, {CENTERX,CENTERY-20}, {CENTERX-20,CENTERY}, {CENTERX+20,CENTERY},
-    {CENTERX+10,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX-30,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX,CENTERY-30},
+  {CENTERX-10,CENTERY}, {CENTERX,CENTERY+20}, {CENTERX,CENTERY-20}, {CENTERX-20,CENTERY}, {CENTERX+20,CENTERY},
+  {CENTERX+10,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX-30,CENTERY}, {CENTERX,CENTERY+30}, {CENTERX,CENTERY-30},
 
-    {CENTERX+10,CENTERY+30}
-  };
+  {CENTERX+10,CENTERY+30}
+};
 
 void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
   int i = 0; //keeps track of enemies that have been successfully made		
 
-	struct enemy defaultEnemy;
+  struct enemy defaultEnemy;
 
   //find location in arrayLiveEnemies that is empty/dead, and place enemy
   for (int j = 0; j < MAX_ENEMY; j++) { 
     //if enemy is dead, make new enemy
-   if(!locationArray[j]) {
+    if(!locationArray[j]) {
       i++;	
       //update locationArray
       locationArray[j] = 1;
 
       //create enemy and ptr to it
-	eArray[j] = defaultEnemy;
+      eArray[j] = defaultEnemy;
 
       //set location for new enemy using reference to struct object 
       eArray[j].locationIndex = j;
@@ -163,9 +200,7 @@ void makeEnemies(int numOfEnemies, struct enemy eArray[], int locationArray[]) {
 
 /*
  * makes ONE bullet at player position and adds it to bulletArray(which is globally defined)
- * TODO: add same functionality for enemy
- * TODO: add to .h file
-*/
+ */
 void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullets[]){
   int x = (playerPtr->x1 + playerPtr->x2)/2;
   int y = playerPtr->y1;
@@ -183,14 +218,14 @@ void makeBullet(struct player *playerPtr, struct bullet bArray[], int liveBullet
 
   for(int j=0; j<MAX_BULLET; j++){
     if(!liveBullets[j]){
-	liveBullets[j] = 1;
-	bArray[j] = b1;
+      liveBullets[j] = 1;
+      bArray[j] = b1;
 
-	//check heading to set bullet angle
-	f3d_mag_read(mag_data); //mags
-	heading = get_heading(mag_data);
-	bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
-	break;
+      //check heading to set bullet angle
+      f3d_mag_read(mag_data); //mags
+      heading = get_heading(mag_data);
+      bArray[j].angle = bulletAngle(heading, playerPtr->starterHeading); 
+      break;
     } else{j++;}
   }
 

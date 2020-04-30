@@ -25,10 +25,9 @@ Game end
 	show score, hit space to play again (runs init()) and goes to during game
 */
 #include <stm32f30x.h>
-#include <f3d_accel.h> 
-#include <f3d_mag.h>
-#include <f3d_i2c.h>
 #include <f3d_delay.h>
+#include <f3d_i2c.h>
+#include <f3d_mag.h>
 #include <f3d_systick.h>
 #include "queue.h"
 #include <f3d_uart.h>
@@ -38,6 +37,7 @@ Game end
 void start(void){
 	f3d_lcd_init();
 	f3d_uart_init();
+	f3d_i2c1_init();
 	f3d_systick_init();
 	f3d_mag_init();
 
@@ -70,9 +70,10 @@ void init_game(void){
 	p1.score = 66;
 	p1.level = 0;
 
-
 	float mag_d[3]; //mags
+
 	f3d_mag_read(mag_d);
+
 	p1.starterHeading = get_heading(mag_d);
 
 	makeEnemies(29, enemyArray, usedEnemyPositions); //create initial first 5 enemies
@@ -107,18 +108,6 @@ int game(void){
 			state = GAME;
 			break;
 		case GAME: //
-			//check for collisions
-			//TODO: checkCollision();
-
-		        // if(up arrow || W || w){makeBullet();}
-		       
-
-			//move objects
-		        //
-		        //shoot(); //this will update positions of bullets that have already been made
-		  //makeBullet(pPtr, bulletArray, usedBulletPositions);
-		  //shoot(bulletArray, usedBulletPositions);
-
 			//check for input
 			if (c = getchar2()) { //have to hold key to move
 				if(c == 'w') { makeBullet(pPtr,bulletArray,usedBulletPositions); }
@@ -126,7 +115,7 @@ int game(void){
 				movePlayer(pPtr,c);
 			}
 
-			//update display
+			//move positions && check for collisions && update display
 			drawAll(pPtr, enemyArray, usedEnemyPositions, bulletArray, usedBulletPositions);
 
 
