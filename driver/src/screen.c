@@ -124,13 +124,6 @@ void drawEnemies(struct enemy e[], int liveEnemy[]){
   }
 }
 
-void eraseEnemies(struct enemy e[], int liveEnemy[]){
-  for (int i=0; i<30; i++) {
-	if (liveEnemy[i]) {
-		eraseEnemy(e[i]);
-	}
-  }
-}
 
 void eraseEnemyIndex(struct enemy e[], int enemyIndex){
 	if (enemyIndex != 99999) { eraseEnemy(e[enemyIndex]); }
