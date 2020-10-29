@@ -2,8 +2,6 @@
   /*
  * newlib_stubs.c
  *
- *  Created on: 2 Nov 2010
- *      Author: nanoage.co.uk
  */
 
 /* 
